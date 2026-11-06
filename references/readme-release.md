@@ -1,0 +1,76 @@
+# README, compatibility, and release workflow
+
+## README shape by artifact
+
+For a plugin, prefer a concise operator-focused README:
+
+```text
+identity and short description
+features
+requirements and installation
+configuration
+commands and permissions
+integrations and compatibility
+license
+```
+
+For a virion/library, prefer an API-focused README:
+
+```text
+identity and non-standalone warning
+requirements
+installation in a consumer build
+quick-start code example
+public API examples
+lifecycle and cleanup
+limitations/compatibility
+license and asset notes
+```
+
+Use code examples that match the current method signatures. A short README is acceptable for a small plugin; a reusable library should usually include at least one complete consumer example.
+
+## README badges and license defaults
+
+- Put badges in a left-aligned block immediately below the project identity and short description. This keeps status information close to the project overview and wraps naturally on narrow screens.
+- For a repository with GitHub Actions, add a CI badge linking to the workflow. For a repository that publishes GitHub Releases, add a release badge linking to the latest release.
+- Use a license badge for the repository's actual license. Add a Discord badge only when the project has a real invite URL and server ID; never leave a placeholder or invent a community link.
+- Prefer two badge rows when needed: CI/release/license/community first, then platform, PHP, API, locale, or package metadata.
+- Use MIT as the default license for new original plugin/library code when the user has not selected another license. Do not relicense copied or bundled third-party code; preserve its original license and attribution.
+- A badge must describe a verifiable state or destination. Do not add download, release, coverage, or community badges that have no corresponding artifact or service.
+
+## Compatibility claims
+
+Separate these facts:
+
+- declared API floor;
+- PHP version and extensions;
+- exact dependency revision used by development/CI;
+- revisions actually tested;
+- revisions believed compatible but not independently tested.
+
+Do not turn “the API constraint is `^5.0.0`” into “every Axolotl-PM 5.x release is verified”. Update the README when implementation uses a newer method, changed packet behavior, extension, or resource-pack assumption.
+
+## Build and release
+
+Inspect the repository's existing build path first. Depending on the project, verify:
+
+- `composer install` or the documented dependency setup;
+- PHP lint and static analysis;
+- unit/integration or consumer smoke tests;
+- AxolotlBucketLabs DevTools or the repository's pinned DevTools/VirionTools build with the exact revision selected for the target;
+- PHAR contents, manifest, autoload, shaded namespaces, and resources;
+- artifact name, version, changelog, license, and release notes.
+
+Historical Poggit metadata can explain how an older project was built, but a new Axolotl-PM project should prefer a reproducible CI workflow when the repository supports it. Keep `.poggit.yml` for compatibility only when it is actually part of the requested distribution path.
+
+## Completion checklist
+
+Before reporting completion, confirm:
+
+- the requested behavior is implemented;
+- the target API was checked from the actual dependency/source;
+- code and manifests agree;
+- README examples run against the current API;
+- tests/lint/static analysis/build were run when available;
+- the final artifact was inspected when packaging was part of the task;
+- unsupported compatibility or untested paths are stated explicitly.
