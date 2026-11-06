@@ -24,6 +24,7 @@ Read only the references relevant to the task:
 - [quality-and-security-rules.md](references/quality-and-security-rules.md) when implementing or reviewing runtime, namespace, dependency, command, data, SQL, protocol, security, or performance behavior.
 - [devtools-workflow.md](references/devtools-workflow.md) when a project needs Axolotl-PM folder loading, virion sharing, PHAR packaging, extraction, or DevTools-backed CI.
 - [readme-release.md](references/readme-release.md) when writing documentation, CI, packaging, compatibility claims, or release artifacts.
+- [repository-publishing.md](references/repository-publishing.md) when creating, publishing, or auditing a GitHub repository's metadata, topics, homepage, or home-page features.
 - [public-release-review.md](references/public-release-review.md) only when preparing a public submission, marketplace release, or Poggit-style acceptance review.
 
 ## Non-negotiable discovery rules

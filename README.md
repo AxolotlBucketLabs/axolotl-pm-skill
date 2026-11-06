@@ -13,6 +13,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - PHP style, naming, static analysis, YAML validation, security, performance, and reproducible builds.
 - AxolotlBucketLabs DevTools workflows for folder loading, shared virions, PHAR packaging, extraction, and CI.
 - README, badge, license, compatibility, changelog, and release guidance.
+- GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
 - Conditional use of related skills such as Find Skills, Humanizer, and Graphify when the task benefits from them.
 
 ## Layout
