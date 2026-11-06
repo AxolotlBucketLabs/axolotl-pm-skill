@@ -24,3 +24,6 @@ jobs:
 
       - name: Run skill validator
         run: python scripts/validate_skill.py
+
+      - name: Run validator regression tests
+        run: python -m unittest discover --start-directory tests --pattern "test_*.py"

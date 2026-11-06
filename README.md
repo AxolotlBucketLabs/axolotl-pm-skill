@@ -44,8 +44,10 @@ axolotl-pm-skill/
 │   ├── style-and-naming.md
 │   ├── virion-workflow.md
 │   └── writing-style.md
-└── scripts/
-    └── validate_skill.py
+├── scripts/
+│   └── validate_skill.py
+└── tests/
+    └── test_validate_skill.py
 ```
 
 ## Installation
@@ -67,6 +69,12 @@ python scripts/validate_skill.py
 ```
 
 The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
+
+Run the validator regression tests with:
+
+```sh
+python -m unittest discover --start-directory tests --pattern "test_*.py"
+```
 
 When changing a reference, update the routing link in `SKILL.md` if its activation condition changes. Keep detailed, mode-specific instructions in references rather than expanding the entrypoint with duplicated material.
 
