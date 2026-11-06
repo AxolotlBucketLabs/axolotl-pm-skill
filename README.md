@@ -13,6 +13,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - PHP style, naming, static analysis, YAML validation, security, performance, and reproducible builds.
 - AxolotlBucketLabs DevTools workflows for folder loading, shared virions, PHAR packaging, extraction, and CI.
 - README, badge, license, compatibility, changelog, and release guidance.
+- Repository identity, commit messages, version mapping, release notes, README scope, date hygiene, and CI freshness.
 - Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
 - Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
@@ -34,6 +35,7 @@ axolotl-pm-skill/
 │   ├── public-release-review.md
 │   ├── quality-and-security-rules.md
 │   ├── readme-release.md
+│   ├── repository-lifecycle.md
 │   ├── repository-publishing.md
 │   ├── style-and-naming.md
 │   ├── virion-workflow.md
