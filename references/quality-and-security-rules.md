@@ -41,6 +41,14 @@ Use this reference for implementation and code review. These rules are adapted f
 - Do not use `dispatchCommand()` to perform internal operations unless the command template is authored and controlled by the project. Prefer a direct public method or service call.
 - Do not use command-preprocess events to block commands when permissions or command ownership can express the policy safely.
 
+## Bedrock protocol and transport
+
+- Treat Minecraft game version, Bedrock network protocol version, Axolotl-PM API version, `plugin.yml` API, `mcpe-protocol`, and the BedrockProtocol package version as separate contracts.
+- For packet-level work, inspect the exact protocol and Bedrock data packages selected by the target lock file. Do not copy packet IDs, packet structures, or protocol constants from memory or a different Minecraft release.
+- Read the target manifest documentation before using `mcpe-protocol`. Declare only versions that the plugin actually supports and test the minimum claimed version.
+- Prefer the stable Axolotl-PM API over packet interception. Isolate protocol-specific code and document why the public API cannot provide the required behavior.
+- Confirm the target transport before assuming RakNet, NetherNet, encryption, compression, or threading behavior. Transport details are not interchangeable across server and Minecraft versions.
+
 ## Must: make commands and permissions ownable
 
 - Commands registered by a plugin must be identifiable as owned by that plugin.

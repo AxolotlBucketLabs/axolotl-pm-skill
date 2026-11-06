@@ -18,6 +18,7 @@ The goal is not to imitate one historical maintainer. Use the current repository
 Read only the references relevant to the task:
 
 - [project-discovery.md](references/project-discovery.md) before making assumptions about an unfamiliar repository or Axolotl-PM version.
+- [official-sources.md](references/official-sources.md) when checking Axolotl-PM documentation, source, support communities, PHP baselines, API versions, or Bedrock protocol data.
 - [style-and-naming.md](references/style-and-naming.md) when creating or reviewing PHP code, comments, names, or class boundaries.
 - [plugin-workflow.md](references/plugin-workflow.md) for plugin lifecycle, commands, events, config, resources, and permissions.
 - [virion-workflow.md](references/virion-workflow.md) for library API, `virion.yml`, shading, dependencies, and consumer integration.

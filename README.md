@@ -1,6 +1,6 @@
 # Axolotl-PM Skill
 
-[![CI](https://github.com/AxolotlBucketLabs/axolotl-pm-skill/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/AxolotlBucketLabs/axolotl-pm-skill/actions/workflows/validate.yml) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Discord](https://img.shields.io/discord/986553214889517088?label=discord&logo=discord&color=5865F2)](https://discord.gg/j2X83ujT6c)
+[![CI](https://github.com/AxolotlBucketLabs/axolotl-pm-skill/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/AxolotlBucketLabs/axolotl-pm-skill/actions/workflows/validate.yml) [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Discord](https://img.shields.io/discord/1568295845374206052?label=discord&logo=discord&color=5865F2)](https://discord.gg/Pk4FrNvHnM)
 
 Axolotl-PM Skill helps Codex develop, review, document, test, and package Axolotl-PM or PocketMine-MP plugins, virions, and reusable PHP libraries.
 
@@ -16,6 +16,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
 - Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
+- Official Axolotl-PM documentation, source, community, PHP runtime, API version, and Bedrock protocol references.
 - Conditional use of related skills such as Find Skills, Humanizer, and Graphify when the task benefits from them.
 
 ## Layout
@@ -27,6 +28,7 @@ axolotl-pm-skill/
 │   └── openai.yaml
 ├── references/
 │   ├── devtools-workflow.md
+│   ├── official-sources.md
 │   ├── plugin-workflow.md
 │   ├── project-discovery.md
 │   ├── public-release-review.md
