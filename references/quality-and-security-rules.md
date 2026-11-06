@@ -57,7 +57,7 @@ Use this reference for implementation and code review. These rules are adapted f
 
 ## Compatibility rule for Axolotl-PM
 
-Do not import the historical rule “unofficial server software is unsupported” as a blanket ban. Axolotl-PM is itself the target in this skill. Instead:
+Do not import the historical rule "unofficial server software is unsupported" as a blanket ban. Axolotl-PM is itself the target in this skill. Instead:
 
 - identify whether the project targets Axolotl-PM, upstream PocketMine-MP, or both;
 - declare the target and API floor explicitly;

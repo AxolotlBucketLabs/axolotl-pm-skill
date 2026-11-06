@@ -55,4 +55,4 @@ Before saying the work is complete:
 - if no test command exists, perform the strongest available PHP lint and a clean package/build smoke test;
 - verify manifests, namespaces, dependency declarations, resources, permissions, and README examples against the implementation;
 - inspect the produced PHAR or consumer artifact when packaging is involved;
-- distinguish “works on the fixture/pinned revision” from “compatible with every Axolotl-PM release in the declared range”.
+- distinguish "works on the fixture/pinned revision" from "compatible with every Axolotl-PM release in the declared range".

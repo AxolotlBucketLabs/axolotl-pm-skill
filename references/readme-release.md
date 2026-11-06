@@ -48,7 +48,7 @@ Separate these facts:
 - revisions actually tested;
 - revisions believed compatible but not independently tested.
 
-Do not turn “the API constraint is `^5.0.0`” into “every Axolotl-PM 5.x release is verified”. Update the README when implementation uses a newer method, changed packet behavior, extension, or resource-pack assumption.
+Do not turn "the API constraint is `^5.0.0`" into "every Axolotl-PM 5.x release is verified". Update the README when implementation uses a newer method, changed packet behavior, extension, or resource-pack assumption.
 
 ## Build and release
 

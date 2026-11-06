@@ -8,7 +8,7 @@ The source basis is the user-provided [Poggit submission rules](https://gist.git
 
 - The plugin should solve a concrete problem and describe that problem clearly.
 - Avoid bundling unrelated features that create bloat or a confusing maintenance boundary.
-- A private-server plugin may be intentionally narrow; do not reject it as “not useful to the majority” unless the destination marketplace requires that criterion.
+- A private-server plugin may be intentionally narrow; do not reject it as "not useful to the majority" unless the destination marketplace requires that criterion.
 - When a project duplicates an existing plugin, document the difference in purpose, maintenance status, compatibility, or user value.
 
 ## Provenance and completeness
