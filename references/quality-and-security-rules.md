@@ -120,6 +120,18 @@ Do not change a local condition, return value, event priority, exception path, o
 
 A simpler-looking implementation is not an improvement if it violates an invariant or changes the meaning of the public contract.
 
+## Boundary-aware verification
+
+Choose evidence that can observe the behavior being changed.
+
+- For pure PHP behavior, prefer a focused test and static analysis against the public contract.
+- For plugin lifecycle, commands, permissions, events, resources, or configuration, add a runtime or consumer smoke check when a source-level test cannot observe the failure.
+- For a virion or reusable library, verify the consumer build, namespace injection or shading, autoloading, and a public API call when packaging can change the result.
+- For a PHAR or release package, inspect the built artifact, manifest, resources, dependencies, and runtime entry point. A successful source test does not prove the package is usable.
+- For compatibility claims, identify the exact revisions tested and keep untested versions separate from verified results.
+
+Do not use a passing check from one boundary as proof for another boundary. State the remaining uncertainty when the strongest relevant check cannot run.
+
 ## Compatibility rule for Axolotl-PM
 
 Do not import the historical rule "unofficial server software is unsupported" as a blanket ban. Axolotl-PM is itself the target in this skill. Instead:

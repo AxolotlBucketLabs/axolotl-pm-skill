@@ -77,6 +77,18 @@ These gates apply before an agent presents a non-trivial change as complete.
 - Inspect the final diff for unrelated formatting, refactors, generated files, prompt context, private links, or copied wording. Remove anything that does not belong to the deliverable.
 - Read the repository's pull request template before writing a pull request. Keep the title and description focused on the observed problem, the narrow change, the relevant evidence, and any real compatibility risk.
 
+## P1 operating rules
+
+Use these rules when a change crosses an API, compatibility, packaging, release, or external system boundary.
+
+- Ground every API claim in the locked dependency, checked-out source, generated signature, or an existing repository call site. Do not invent a class, method, event, manifest field, or build option from memory, a prompt, or a similar upstream project.
+- Treat similar APIs as a lead for investigation, not as proof of compatibility. Confirm the namespace, signature, lifecycle behavior, return value, exception behavior, and version boundary before relying on it.
+- Match the verification to the failure boundary. Source tests do not prove plugin lifecycle behavior, a successful build does not prove a PHAR works at runtime, and a virion unit test does not prove a consumer can shade and load the package.
+- For a public API, manifest, configuration format, permission, database schema, serialized value, or release artifact, search all repository consumers before changing the contract. Document a migration or compatibility limit when the change is intentionally breaking.
+- Keep investigation results in the task report unless a project consumer needs a permanent document. Do not create a research note, design document, compatibility matrix, or migration guide only because an agent performed an investigation.
+- Do not publish, upload, create a release, change repository settings, comment on an issue or pull request, or call an external service beyond the requested workflow. If the requested scope or authorization is unclear, stop before the external write.
+- Do not turn a small bug fix into a migration, dependency refresh, formatter sweep, or architecture cleanup. Expand the scope only when the demonstrated problem or a required compatibility change makes it necessary.
+
 ## Non-negotiable discovery rules
 
 1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `.poggit.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.

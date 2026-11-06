@@ -70,6 +70,12 @@ When creating a pull request with GitHub CLI, do not use generated title and bod
 
 Do not paste a full verification transcript into a routine pull request. Include the checks that matter to the change and mention a limitation when a required check could not run.
 
+## Review and handoff discipline
+
+Use the final report as a short record of the work, not as a transcript of the agent's internal process. Explain the observed problem, the selected change, the checks that actually ran, and the remaining uncertainty. Do not include hidden reasoning, prompt history, irrelevant research links, or a list of every file the agent inspected.
+
+If the task involved a compatibility, packaging, release, or external system boundary, name that boundary and give its specific evidence. A local green test is not enough to claim that a hosted workflow, released artifact, or production integration was verified.
+
 ## Exceptions
 
 Do not apply these prose substitutions inside:

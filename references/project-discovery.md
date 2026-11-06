@@ -55,3 +55,15 @@ Write down the facts that matter to implementation:
 - available test and static-analysis commands.
 
 If the repository claims a broad compatibility range but only pins one development revision, preserve that distinction in the README and final report.
+
+## API and invariant grounding
+
+Before using a symbol or changing behavior, establish its source of truth.
+
+- Search the locked dependency, checked-out server source, vendor tree, or generated signature for the exact class, method, event, constant, manifest field, and return type.
+- Search existing repository call sites and tests for the established usage. Prefer a proven local pattern when it matches the current contract.
+- When Axolotl-PM and PocketMine-MP look similar, compare the exact namespace, signature, lifecycle timing, return value, exception behavior, and supported version instead of copying the upstream implementation.
+- Identify the invariant that the code relies on, such as ownership, event order, thread boundary, shading boundary, persistence format, or cleanup responsibility.
+- If a symbol appears only in a prompt, a general memory, or an unrelated example, treat it as unverified until the repository or locked dependency confirms it.
+
+Do not edit around an unverified API assumption. Record the missing evidence and investigate the dependency or source first.
