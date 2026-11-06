@@ -64,7 +64,7 @@ Use this workflow for non-trivial changes:
 6. Review for deletion. Inspect every new helper, wrapper, interface, guard, comment, test, and documentation block. If removing it preserves the verified behavior and project contract, remove it.
 7. Report proportionally. Keep ordinary implementation and review summaries short. Include detailed evidence for audits, security work, release work, compatibility changes, and incidents.
 
-## P0 completion gates
+## Completion gates
 
 These gates apply before an agent presents a non-trivial change as complete.
 
@@ -77,7 +77,7 @@ These gates apply before an agent presents a non-trivial change as complete.
 - Inspect the final diff for unrelated formatting, refactors, generated files, prompt context, private links, or copied wording. Remove anything that does not belong to the deliverable.
 - Read the repository's pull request template before writing a pull request. Keep the title and description focused on the observed problem, the narrow change, the relevant evidence, and any real compatibility risk.
 
-## P1 operating rules
+## Boundary and compatibility rules
 
 Use these rules when a change crosses an API, compatibility, packaging, release, or external system boundary.
 
@@ -89,7 +89,7 @@ Use these rules when a change crosses an API, compatibility, packaging, release,
 - Do not publish, upload, create a release, change repository settings, comment on an issue or pull request, or call an external service beyond the requested workflow. If the requested scope or authorization is unclear, stop before the external write.
 - Do not turn a small bug fix into a migration, dependency refresh, formatter sweep, or architecture cleanup. Expand the scope only when the demonstrated problem or a required compatibility change makes it necessary.
 
-## P2 workflow selection
+## Workflow selection
 
 Choose the smallest workflow that can prove the requested result.
 
