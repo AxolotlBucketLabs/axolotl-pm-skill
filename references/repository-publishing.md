@@ -6,17 +6,17 @@ Read this reference when creating a GitHub repository, moving a project into an 
 
 Before reporting a repository as published, inspect and set the following when they are in scope:
 
-- repository name and owner;
-- visibility;
-- concise description that matches the actual artifact;
-- homepage/Website URL pointing to a real project landing page, documentation site, or the repository README when no separate site exists;
-- focused lowercase topics that describe the ecosystem, artifact type, and primary technologies;
-- default branch;
-- root license and license badge;
-- README links and badges pointing to the final owner/repository;
-- CI, release, package, deployment, and community links only when the corresponding service or artifact exists.
+- Confirm the repository name and owner.
+- Confirm the visibility.
+- Set a concise description that matches the actual artifact.
+- Set the homepage or website URL to a real project landing page, documentation site, or the repository README when no separate site exists.
+- Use focused lowercase topics that describe the ecosystem, artifact type, and primary technologies.
+- Confirm the default branch.
+- Confirm the root license and license badge.
+- Confirm that README links and badges point to the final owner and repository.
+- Add CI, release, package, deployment, and community links only when the corresponding service or artifact exists.
 
-Do not invent a website, Discord invite, release, package registry, deployment target, or topic merely to fill a field. A repository URL with a `#readme` fragment is an acceptable temporary homepage when there is no separate documentation site; replace it when a real project site becomes available.
+Do not invent a website, Discord invite, release, package registry, deployment target, or topic merely to fill a field. A repository URL with a `#readme` fragment is an acceptable temporary homepage when there is no separate documentation site. Replace it when a real project site becomes available.
 
 Keep topics useful rather than exhaustive. Prefer a small set such as `axolotl-pm`, `pocketmine-mp`, `pmmp`, `php`, `pmmp-plugin`, `virions`, and `codex-skill` over a tag dump or unrelated popularity terms.
 
@@ -39,8 +39,8 @@ gh api repos/OWNER/REPOSITORY/topics
 
 Then verify that the README's badges and links use the same final owner/repository. Distinguish these evidence layers:
 
-- CLI/API output proves repository metadata and topics;
-- the GitHub Settings UI proves home-page inclusion toggles;
-- a successful Actions run proves the workflow ran, not that repository presentation settings are correct.
+- CLI or API output proves repository metadata and topics.
+- The GitHub Settings UI proves home-page inclusion toggles.
+- A successful Actions run proves that the workflow ran. It does not prove that repository presentation settings are correct.
 
 If the project moved from another owner, preserve the old repository unless the user explicitly asks to delete it. Update links and badges before treating the move as complete.

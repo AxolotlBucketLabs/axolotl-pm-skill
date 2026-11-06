@@ -1,6 +1,6 @@
 # Quality and security rules
 
-Use this reference for implementation and code review. These rules are adapted from the user-provided [Poggit submission rules](https://gist.github.com/NhanAZ/992c5ba4211252d202d8d4e8aac080c6), but they are written as Axolotl-PM/PMMP engineering guidance rather than marketplace policy.
+Use this reference for implementation and code review. These rules are written as Axolotl-PM and PMMP engineering guidance, not as marketplace policy.
 
 ## Must: preserve readable, collision-safe code
 
@@ -67,14 +67,14 @@ Use this reference for implementation and code review. These rules are adapted f
 
 A test must protect a project contract or a demonstrated regression. Do not add a test only to increase the test count.
 
-For a bug fix:
+For a bug fix, follow these steps:
 
-- reproduce the failure on the baseline implementation when the baseline is available;
-- make the focused test or reproducer fail before the fix;
-- implement the smallest fix;
-- make the focused test pass after the fix;
-- run the relevant existing test suite and static analysis;
-- confirm that the test would fail if the bug were reintroduced.
+- Reproduce the failure on the baseline implementation when the baseline is available.
+- Make the focused test or reproducer fail before the fix.
+- Implement the smallest fix.
+- Make the focused test pass after the fix.
+- Run the relevant existing test suite and static analysis.
+- Confirm that the test would fail if the bug were reintroduced.
 
 Prefer assertions against observable behavior, public APIs, persisted data, emitted events, generated artifacts, or runtime output. Do not mock the logic being tested or assert private implementation details unless the repository's contract requires it.
 
@@ -82,12 +82,12 @@ Do not make an existing test easier to satisfy in order to make a change pass. D
 
 Avoid tests that:
 
-- only cover the happy path when the bug is in a failure path;
-- repeat an existing test without adding a distinct contract;
-- assert a constant or implementation detail instead of behavior;
-- pass even when the reported bug is restored;
-- only confirm that a mock returned the value configured by the test;
-- test framework behavior rather than project behavior.
+- Only cover the happy path when the bug is in a failure path.
+- Repeat an existing test without adding a distinct contract.
+- Assert a constant or implementation detail instead of behavior.
+- Pass even when the reported bug is restored.
+- Only confirm that a mock returned the value configured by the test.
+- Test framework behavior rather than project behavior.
 
 Mutation testing is recommended for behavior-heavy libraries, parsers, security-sensitive code, and public APIs when the project already supports it. It is not a universal requirement for a small plugin, a translation-only change, documentation work, or a repository configuration change.
 
@@ -111,18 +111,18 @@ Do not add hypothetical sanitization, validation, redaction, logging, fallback b
 
 Before changing logic, identify the assumptions that make the current design correct.
 
-Check:
+Check the following invariants:
 
-- ownership of state;
-- lifecycle ordering;
-- event ordering and cancellation;
-- threading and async boundaries;
-- namespace and shading boundaries;
-- version and API contracts;
-- resource cleanup;
-- permission and command semantics;
-- fallback behavior;
-- persistence and serialization formats.
+- Check ownership of state.
+- Check lifecycle ordering.
+- Check event ordering and cancellation.
+- Check threading and async boundaries.
+- Check namespace and shading boundaries.
+- Check version and API contracts.
+- Check resource cleanup.
+- Check permission and command semantics.
+- Check fallback behavior.
+- Check persistence and serialization formats.
 
 Do not change a local condition, return value, event priority, exception path, or lifecycle hook without checking its callers, consumers, tests, and related invariants.
 
@@ -144,11 +144,11 @@ Do not use a passing check from one boundary as proof for another boundary. Stat
 
 Do not import the historical rule "unofficial server software is unsupported" as a blanket ban. Axolotl-PM is itself the target in this skill. Instead:
 
-- identify whether the project targets Axolotl-PM, upstream PocketMine-MP, or both;
-- declare the target and API floor explicitly;
-- inspect the locked source or exact revision for signatures and behavior;
-- test each claimed target separately;
-- never claim upstream compatibility merely because an Axolotl-PM API looks similar.
+- Identify whether the project targets Axolotl-PM, upstream PocketMine-MP, or both.
+- Declare the target and API floor explicitly.
+- Inspect the locked source or exact revision for signatures and behavior.
+- Test each claimed target separately.
+- Never claim upstream compatibility merely because an Axolotl-PM API looks similar.
 
 ## Review severity
 

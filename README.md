@@ -13,7 +13,9 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - PHP style, naming, static analysis, YAML validation, security, performance, and reproducible builds.
 - AxolotlBucketLabs DevTools workflows for folder loading, shared virions, PHAR packaging, extraction, and CI.
 - README, badge, license, compatibility, changelog, and release guidance.
+- Repository identity, commit messages, version mapping, release notes, README scope, date hygiene, and CI freshness.
 - Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
+- GitHub Flavored Markdown structure for inline code, fenced code, tables, alerts, links, and collapsed details.
 - Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
 - Official Axolotl-PM documentation, source, community, PHP runtime, API version, and Bedrock protocol references.
@@ -23,6 +25,11 @@ It keeps the repository's own conventions as the primary source of truth, then a
 
 ```text
 axolotl-pm-skill/
+├── .github/
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── validate.yml
+├── AGENTS.md
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -34,12 +41,15 @@ axolotl-pm-skill/
 │   ├── public-release-review.md
 │   ├── quality-and-security-rules.md
 │   ├── readme-release.md
+│   ├── repository-lifecycle.md
 │   ├── repository-publishing.md
 │   ├── style-and-naming.md
 │   ├── virion-workflow.md
 │   └── writing-style.md
-└── scripts/
-    └── validate_skill.py
+├── scripts/
+│   └── validate_skill.py
+└── tests/
+    └── test_validate_skill.py
 ```
 
 ## Installation
@@ -60,7 +70,13 @@ Run the repository validator after editing the skill:
 python scripts/validate_skill.py
 ```
 
-The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, and scaffold placeholders without requiring third-party packages.
+The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, Markdown fence boundaries, prose punctuation, checklist bullets, research-only context leaks, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
+
+Run the validator regression tests with:
+
+```sh
+python -m unittest discover --start-directory tests --pattern "test_*.py"
+```
 
 When changing a reference, update the routing link in `SKILL.md` if its activation condition changes. Keep detailed, mode-specific instructions in references rather than expanding the entrypoint with duplicated material.
 

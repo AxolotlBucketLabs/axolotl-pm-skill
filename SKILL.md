@@ -1,13 +1,13 @@
 ---
 name: axolotl-pm-skill
-description: "Develop, review, document, test, and package Axolotl-PM or PocketMine-MP plugins, virions, and reusable PHP libraries. Use when a task mentions Axolotl-PM, PocketMine plugins, plugin.yml, virion.yml, DevTools, Poggit, or a PMMP library."
+description: "Develop, review, document, test, and package Axolotl-PM or PocketMine-MP plugins, virions, and reusable PHP libraries. Use when a task mentions Axolotl-PM, PocketMine plugins, plugin.yml, virion.yml, DevTools, or a PMMP library."
 ---
 
 # Axolotl-PM Skill
 
 Use this skill for work that extends a Bedrock server through an Axolotl-PM/PocketMine plugin or through a reusable library/virion.
 
-The goal is not to imitate one historical maintainer. Use the current repository as the primary source of truth, then apply Axolotl-PM conventions and only then use broader PMMP/Poggit patterns.
+The goal is not to imitate one historical maintainer. Use the current repository as the primary source of truth, then apply Axolotl-PM conventions and only then use broader PMMP patterns.
 
 ## Route the task
 
@@ -26,8 +26,9 @@ Read only the references relevant to the task:
 - [devtools-workflow.md](references/devtools-workflow.md) when a project needs Axolotl-PM folder loading, virion sharing, PHAR packaging, extraction, or DevTools-backed CI.
 - [writing-style.md](references/writing-style.md) when writing README files, changelogs, release notes, comments, issues, or other prose for humans.
 - [readme-release.md](references/readme-release.md) when writing documentation, CI, packaging, compatibility claims, or release artifacts.
+- [repository-lifecycle.md](references/repository-lifecycle.md) when creating or auditing repository identity, commit messages, versioning, changelogs, releases, README scope, dates, or CI freshness.
 - [repository-publishing.md](references/repository-publishing.md) when creating, publishing, or auditing a GitHub repository's metadata, topics, homepage, or home-page features.
-- [public-release-review.md](references/public-release-review.md) only when preparing a public submission, marketplace release, or Poggit-style acceptance review.
+- [public-release-review.md](references/public-release-review.md) only when preparing a public submission, marketplace release, or publication review.
 
 ## Maintainer posture
 
@@ -76,7 +77,12 @@ These gates apply before an agent presents a non-trivial change as complete.
 - Keep the diff proportional to the demonstrated problem. Every new helper, abstraction, validation rule, dependency, documentation file, and comment must have a current consumer or a clearly verified maintenance purpose.
 - Verify the change independently with the strongest checks that apply. Report local tests, static analysis, packaging, hosted CI, runtime checks, and release state as separate evidence. Never turn an unexecuted check into a passing claim.
 - Inspect the final diff for unrelated formatting, refactors, generated files, prompt context, private links, or copied wording. Remove anything that does not belong to the deliverable.
+- Before completing a human-facing Markdown change, inspect both the raw source and its rendered structure. Check inline code, fenced code, language tags, links, tables, alerts, and collapsed sections when they are used.
 - Read the repository's pull request template before writing a pull request. Keep the title and description focused on the observed problem, the narrow change, the relevant evidence, and any real compatibility risk.
+
+## Maintaining this skill
+
+When the target is this skill repository, read [`AGENTS.md`](AGENTS.md) with this file before editing. Apply its self-maintenance rules to the skill's Markdown, validator, tests, and examples. Run the local validator and its regression tests before committing. Do not copy `AGENTS.md` into a generated plugin or library unless the user explicitly requests repository instructions for that project.
 
 ## Boundary and compatibility rules
 
@@ -113,7 +119,7 @@ Use related skills when they solve a real part of the task. Do not install or in
 
 ## Non-negotiable discovery rules
 
-1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `.poggit.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.
+1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.
 2. Do not assume an Axolotl-PM API is identical to an upstream PMMP API. Confirm the class, method signature, namespace, and behavior from the locked dependency or the checked-out source.
 3. Prefer the repository's existing convention over a generic template. Preserve namespace layout, lifecycle registration, error handling, configuration style, and build commands unless the task asks for a migration.
 4. Separate facts from compatibility assumptions. Record the PHP version, plugin API floor, exact development revision, tested revisions, and unverified range whenever those details affect the result.
@@ -123,10 +129,10 @@ Use related skills when they solve a real part of the task. Do not install or in
 - Prefer `declare(strict_types=1)` and typed parameters, return types, and properties for new code, subject to the target's actual PHP/API constraints.
 - Use lower camel case for PHP methods and variables, descriptive domain names for public APIs, and short loop variables only where their scope makes the meaning obvious.
 - Keep plugin entry points focused on bootstrap and lifecycle wiring. Move substantial command, listener, task, storage, and service logic into focused classes when the repository's scale warrants it.
-- Keep a virion reusable and host-agnostic. The host plugin should provide lifecycle context and server integration; consumers should not need to know the library's internal implementation.
+- Keep a virion reusable and host-agnostic. The host plugin should provide lifecycle context and server integration. Consumers should not need to know the library's internal implementation.
 - Document public APIs, lifecycle requirements, non-obvious invariants, compatibility limitations, and packaging requirements. Do not add comments that merely restate obvious code.
 - Do not make `final`, Composer, PHPUnit, a particular brace style, or a particular factory/singleton pattern universal rules. Adopt them when the target repository or API design supports them.
-- Apply the security and performance gates in [quality-and-security-rules.md](references/quality-and-security-rules.md) to new runtime code and reviews; do not treat historical Poggit acceptance policy as a substitute for repository-specific requirements.
+- Apply the security and performance gates in [quality-and-security-rules.md](references/quality-and-security-rules.md) to new runtime code and reviews. Do not substitute a marketplace policy for repository-specific requirements.
 - Apply the human-facing prose rules in [writing-style.md](references/writing-style.md) to README files, changelogs, release notes, comments, issues, and explanations. Do not apply those prose rules to code or machine-readable data.
 - When writing a README or release workflow, apply the badge and license rules in [readme-release.md](references/readme-release.md).
 
@@ -134,8 +140,8 @@ Use related skills when they solve a real part of the task. Do not install or in
 
 Before saying the work is complete:
 
-- run the repository's available lint, static-analysis, unit/integration-test, and build commands;
-- if no test command exists, perform the strongest available PHP lint and a clean package/build smoke test;
-- verify manifests, namespaces, dependency declarations, resources, permissions, and README examples against the implementation;
-- inspect the produced PHAR or consumer artifact when packaging is involved;
-- distinguish "works on the fixture/pinned revision" from "compatible with every Axolotl-PM release in the declared range".
+- Run the repository's available lint, static analysis, unit or integration tests, and build checks.
+- If no test command exists, perform the strongest available PHP lint and a clean package or build smoke test.
+- Verify manifests, namespaces, dependency declarations, resources, permissions, and README examples against the implementation.
+- Inspect the produced PHAR or consumer artifact when packaging is involved.
+- Distinguish "works on the fixture or pinned revision" from "compatible with every Axolotl-PM release in the declared range".

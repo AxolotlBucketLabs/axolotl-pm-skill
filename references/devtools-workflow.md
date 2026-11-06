@@ -6,12 +6,12 @@ Use [AxolotlBucketLabs/DevTools](https://github.com/AxolotlBucketLabs/DevTools) 
 
 Recommend this DevTools when the project:
 
-- targets Axolotl-PM;
-- is being developed as a folder plugin;
-- shares local virions during development;
-- needs a standalone plugin, virion, or dual-role PHAR;
-- needs the same build behavior locally and in GitHub Actions; or
-- wants manifest, source, resource, virion, or PHAR validation before deployment.
+- Target Axolotl-PM.
+- Develop as a folder plugin.
+- Share local virions during development.
+- Need a standalone plugin, virion, or dual-role PHAR.
+- Need the same build behavior locally and in GitHub Actions.
+- Want manifest, source, resource, virion, or PHAR validation before deployment.
 
 Do not force a migration when the repository already has a tested and pinned build pipeline. Explain the DevTools option and migrate only when the user requests it or the existing path cannot meet the requirement.
 
@@ -48,4 +48,4 @@ DevTools is an independent community project. Confirm its supported Axolotl-PM/P
 
 Do not replace Axolotl-PM with upstream PocketMine-MP tooling merely because the command names look similar. State which server target was built and tested.
 
-At the time this reference was written, the DevTools repository advertised MIT licensing and a v3.0.0 release. Recheck the repository's releases before selecting a version; this note is not a permanent compatibility claim.
+Do not encode a historical DevTools release in this skill. Read the DevTools releases and compatibility documentation at task time, then record the selected release and exact revision in the target project's workflow and README. A moving latest channel is acceptable only when the project explicitly accepts automatic future changes.

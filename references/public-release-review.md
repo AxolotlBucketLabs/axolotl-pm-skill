@@ -1,14 +1,12 @@
 # Public release and marketplace review
 
-Read this reference only when the user asks to prepare a public release, submit to Poggit or another marketplace, or review whether a plugin is publishable. These are release-policy checks, not universal coding rules.
-
-The source basis is the user-provided [Poggit submission rules](https://gist.github.com/NhanAZ/992c5ba4211252d202d8d4e8aac080c6). Recheck the destination marketplace's current policy before submission; do not assume historical Poggit policy is current or applies to Axolotl-PM.
+Read this reference only when the user asks to prepare a public release, submit to a marketplace, or review whether a plugin is publishable. These are release-policy checks, not universal coding rules. Recheck the destination's current policy before submission.
 
 ## Purpose and scope
 
 - The plugin should solve a concrete problem and describe that problem clearly.
 - Avoid bundling unrelated features that create bloat or a confusing maintenance boundary.
-- A private-server plugin may be intentionally narrow; do not reject it as "not useful to the majority" unless the destination marketplace requires that criterion.
+- A private-server plugin may be intentionally narrow. Do not reject it as "not useful to the majority" unless the destination marketplace requires that criterion.
 - When a project duplicates an existing plugin, document the difference in purpose, maintenance status, compatibility, or user value.
 
 ## Provenance and completeness
@@ -29,13 +27,13 @@ The source basis is the user-provided [Poggit submission rules](https://gist.git
 ## Target and compatibility
 
 - Release only against a stable, explicitly supported API target unless the destination has an experimental channel.
-- For Axolotl-PM, state clearly that it is the target. Do not copy a policy that bans unofficial forks; instead, separate and test Axolotl-PM and upstream PocketMine-MP compatibility claims.
+- For Axolotl-PM, state clearly that it is the target. Do not copy a policy that bans unofficial forks. Separate and test Axolotl-PM and upstream PocketMine-MP compatibility claims.
 - Keep plugin name, manifest name, release name, namespace, and artifact name consistent. Do not put version numbers such as `-PM5` in the plugin name.
 
 ## User-facing documentation
 
 - Provide an English description for a broad public release, with additional translations where useful.
-- Explain purpose and behavior in text; screenshots or videos alone are not documentation.
+- Explain purpose and behavior in text. Screenshots or videos alone are not documentation.
 - Use clean Markdown with sections for requirements, installation, configuration, commands, permissions, dependencies, compatibility, and license.
 - Include a user-readable changelog for updates. Mention breaking changes, migrations, behavior changes, and important fixes rather than cosmetic repository edits.
 - Include an SPDX-compatible open-source license at the project root and check licenses for bundled dependencies and assets.
@@ -51,9 +49,9 @@ The source basis is the user-provided [Poggit submission rules](https://gist.git
 
 Before submission, verify:
 
-- the artifact is built from the intended commit;
-- the manifest, README, changelog, license, namespace, and version agree;
-- required dependencies and optional integrations are accurately declared;
-- the PHAR or package contains the required source/resources and no accidental secrets or development files;
-- the advertised API target and PHP range match what was actually tested;
-- known limitations and unverified compatibility are stated.
+- Build the artifact from the intended commit.
+- Confirm that the manifest, README, changelog, license, namespace, and version agree.
+- Declare required dependencies and optional integrations accurately.
+- Confirm that the PHAR or package contains the required source and resources without accidental secrets or development files.
+- Confirm that the advertised API target and PHP range match what was actually tested.
+- State known limitations and unverified compatibility.

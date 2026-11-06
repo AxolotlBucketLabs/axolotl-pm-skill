@@ -18,28 +18,28 @@ Do not replace an existing local convention merely because another style is more
 
 Use `rg --files` and targeted `rg` searches. Inspect:
 
-- `composer.json` and `composer.lock` for PHP, server, library, and analysis constraints;
-- `plugin.yml` for plugin identity, main class, API, commands, permissions, dependencies, and load behavior;
-- `virion.yml` for `antigen`, version, API, PHP and virion dependency metadata;
-- `devtools.yml` and `.poggit.yml` for virion injection, build paths, and release behavior;
-- `.github/workflows/` for pinned builders, test matrices, artifact names, and release gates;
-- `README*`, `LICENSE`, `resources/`, `tests/`, `examples/`, and `docs/`;
-- representative classes in `src/`, especially the entry point and one class from each major subsystem.
+- Inspect `composer.json` and `composer.lock` for PHP, server, library, and analysis constraints.
+- Inspect `plugin.yml` for plugin identity, main class, API, commands, permissions, dependencies, and load behavior.
+- Inspect `virion.yml` for `antigen`, version, API, PHP, and virion dependency metadata.
+- Inspect `devtools.yml` for virion injection, build paths, and release behavior.
+- Inspect `.github/workflows/` for pinned builders, test matrices, artifact names, and release gates.
+- Inspect `README*`, `LICENSE`, `resources/`, `tests/`, `examples/`, and `docs/`.
+- Inspect representative classes in `src/`, especially the entry point and one class from each major subsystem.
 
 ## Classify the artifact
 
 Signals for a plugin:
 
-- `plugin.yml` and a `PluginBase` subclass;
-- `onEnable()`, `onDisable()`, command registration, event listeners, scheduled tasks;
-- server-facing resources, configuration, permissions, or commands.
+- Find `plugin.yml` and a `PluginBase` subclass.
+- Find `onEnable()`, `onDisable()`, command registration, event listeners, and scheduled tasks.
+- Check server-facing resources, configuration, permissions, and commands.
 
 Signals for a virion/library:
 
-- `virion.yml` and an `antigen` namespace;
-- a public service, value object, parser, adapter, or provider API;
-- consumer-side shading/injection rather than direct installation in `plugins/`;
-- Composer metadata or a separate example consumer.
+- Find `virion.yml` and an `antigen` namespace.
+- Expose a public service, value object, parser, adapter, or provider API.
+- Use consumer-side shading or injection rather than direct installation in `plugins/`.
+- Find Composer metadata or a separate example consumer.
 
 When both appear, identify which code is the reusable core and which code is the server/plugin adapter. Do not move server lifecycle assumptions into the reusable core without a concrete reason.
 
@@ -47,12 +47,12 @@ When both appear, identify which code is the reusable core and which code is the
 
 Write down the facts that matter to implementation:
 
-- PHP version and extensions;
-- Axolotl-PM/PocketMine package and exact locked revision;
-- API version floor and any upper bound;
-- DevTools/VirionTools revision;
-- supported build modes: folder plugin, local virion, Composer consumer, or standalone PHAR;
-- available test and static-analysis commands.
+- Record the PHP version and extensions.
+- Record the Axolotl-PM or PocketMine package and exact locked revision.
+- Record the API version floor and any upper bound.
+- Record the DevTools or VirionTools revision.
+- Record supported build modes such as a folder plugin, local virion, Composer consumer, or standalone PHAR.
+- Record available test and static analysis commands.
 
 If the repository claims a broad compatibility range but only pins one development revision, preserve that distinction in the README and final report.
 

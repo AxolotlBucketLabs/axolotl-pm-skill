@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the structure and routing links of this Codex skill."""
+"""Validate the structure, routing links, and CI policy of this Codex skill."""
 
 from __future__ import annotations
 
@@ -11,21 +11,151 @@ from pathlib import Path
 EXPECTED_NAME = "axolotl-pm-skill"
 PLACEHOLDER_RE = re.compile(r"\b(?:TODO|FIXME|REPLACE_ME|YOUR_[A-Z_]+)\b")
 REFERENCE_RE = re.compile(r"\]\((references/[^)]+)\)")
+ACTION_USE_RE = re.compile(
+    r"^\s*uses:\s*([^\s]+)@([^\s#]+)(?:\s+#\s*(.*?))?\s*$"
+)
+FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+INLINE_CODE_RE = re.compile(r"`+[^`\n]+`+")
+FORBIDDEN_PROSE_RE = re.compile(r"[—–;“”‘’]")
+LOWERCASE_BULLET_RE = re.compile(r"^\s*[-*+]\s+[a-z]")
+LABEL_PROSE_RE = re.compile(
+    r"^\s*(?:Status|Result|Verification|Notes|Reason|Output|Summary)\s*:\s+\S"
+)
+RESEARCH_CONTEXT_RE = re.compile(r"(?i)\bPoggit\b|992c5ba4211252d202d8d4e8aac080c6")
+FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+VERSION_COMMENT_RE = re.compile(r"^v[0-9]+(?:\.[0-9]+){0,2}(?:[-+][0-9A-Za-z.-]+)?$")
+MUTABLE_ACTION_REFS = {"HEAD", "develop", "dev", "latest", "main", "master"}
 
 
 def fail(message: str) -> None:
     raise SystemExit(f"error: {message}")
 
 
+def validate_workflows(skill_dir: Path) -> None:
+    workflow_dir = skill_dir / ".github" / "workflows"
+    if not workflow_dir.is_dir():
+        fail(".github/workflows is missing")
+
+    workflows = sorted((*workflow_dir.glob("*.yml"), *workflow_dir.glob("*.yaml")))
+    if not workflows:
+        fail(".github/workflows has no workflow files")
+
+    for workflow in workflows:
+        for line_number, line in enumerate(workflow.read_text(encoding="utf-8").splitlines(), 1):
+            match = ACTION_USE_RE.match(line)
+            if match is None:
+                continue
+
+            action, reference, version_comment = match.groups()
+            if action.startswith("./"):
+                continue
+            if reference in MUTABLE_ACTION_REFS:
+                fail(f"{workflow.name}:{line_number} uses mutable action ref {reference}")
+            if FULL_SHA_RE.fullmatch(reference) is None:
+                fail(f"{workflow.name}:{line_number} must pin {action} to a full commit SHA")
+            if version_comment is None or VERSION_COMMENT_RE.fullmatch(version_comment.strip()) is None:
+                fail(f"{workflow.name}:{line_number} needs a version comment beside {action}")
+
+
+def validate_dependabot(skill_dir: Path) -> None:
+    dependabot_file = skill_dir / ".github" / "dependabot.yml"
+    if not dependabot_file.is_file():
+        fail(".github/dependabot.yml is missing")
+
+    dependabot_text = dependabot_file.read_text(encoding="utf-8")
+    if re.search(r"^\s*-\s*package-ecosystem:\s*github-actions\s*$", dependabot_text, re.MULTILINE) is None:
+        fail(".github/dependabot.yml must update GitHub Actions")
+    if re.search(r"^\s*directory:\s*/\s*$", dependabot_text, re.MULTILINE) is None:
+        fail(".github/dependabot.yml must monitor the repository root")
+
+
+def validate_markdown_fences(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        open_fence: tuple[str, int, int] | None = None
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            match = FENCE_RE.match(line)
+            if match is None:
+                continue
+
+            fence, suffix = match.groups()
+            marker = fence[0]
+            length = len(fence)
+            if open_fence is None:
+                open_fence = (marker, length, line_number)
+                continue
+
+            open_marker, open_length, open_line = open_fence
+            if marker != open_marker or length < open_length or suffix.strip():
+                continue
+            open_fence = None
+
+        if open_fence is not None:
+            marker, length, line_number = open_fence
+            fail(
+                f"{markdown_file.name}:{line_number} has an unclosed "
+                f"{length}-character {marker} Markdown fence"
+            )
+
+
+def validate_prose_style(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        in_fence = False
+        fence_marker = ""
+        fence_length = 0
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            fence_match = FENCE_RE.match(line)
+            if fence_match is not None:
+                fence, suffix = fence_match.groups()
+                marker = fence[0]
+                length = len(fence)
+                if not in_fence:
+                    in_fence = True
+                    fence_marker = marker
+                    fence_length = length
+                elif marker == fence_marker and length >= fence_length and not suffix.strip():
+                    in_fence = False
+                continue
+
+            if in_fence or line.startswith(("    ", "\t")):
+                continue
+
+            prose = INLINE_CODE_RE.sub("", line)
+            if FORBIDDEN_PROSE_RE.search(prose):
+                fail(f"{markdown_file.name}:{line_number} contains forbidden prose punctuation")
+            if LOWERCASE_BULLET_RE.match(prose):
+                fail(f"{markdown_file.name}:{line_number} starts a bullet with lowercase prose")
+            if LABEL_PROSE_RE.match(prose):
+                fail(f"{markdown_file.name}:{line_number} uses label-shaped prose")
+
+
+def validate_context_boundaries(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            if RESEARCH_CONTEXT_RE.search(line):
+                fail(f"{markdown_file.name}:{line_number} contains research-only context")
+
+
 def main() -> int:
     skill_dir = Path(__file__).resolve().parents[1]
     skill_file = skill_dir / "SKILL.md"
     ui_file = skill_dir / "agents" / "openai.yaml"
+    agents_file = skill_dir / "AGENTS.md"
 
     if not skill_file.is_file():
         fail("SKILL.md is missing")
     if not ui_file.is_file():
         fail("agents/openai.yaml is missing")
+    if not agents_file.is_file():
+        fail("AGENTS.md is missing")
 
     skill_text = skill_file.read_text(encoding="utf-8")
     if not skill_text.startswith("---\n"):
@@ -54,6 +184,12 @@ def main() -> int:
     for reference in REFERENCE_RE.findall(skill_text):
         if not (skill_dir / reference).is_file():
             fail(f"referenced file does not exist: {reference}")
+
+    validate_markdown_fences(skill_dir)
+    validate_prose_style(skill_dir)
+    validate_context_boundaries(skill_dir)
+    validate_workflows(skill_dir)
+    validate_dependabot(skill_dir)
 
     print(f"Skill is valid: {EXPECTED_NAME}")
     return 0
