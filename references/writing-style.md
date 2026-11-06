@@ -41,8 +41,6 @@ Do not apply these prose substitutions inside:
 - localized translations when the target language's normal punctuation requires another form;
 - official names, package names, version ranges, or external metadata that must remain unchanged.
 
-The rules in this file are adapted from the maintainer guidance in [BedrockDebugProxy](https://github.com/NhanAZ/BedrockDebugProxy/blob/main/AGENTS.md) and [nhanaz.io.vn](https://github.com/NhanAZ/nhanaz.io.vn/blob/main/AGENTS.md). Their project-specific choices, such as website-specific pronouns or layout rules, are not automatically applied to Axolotl-PM projects.
-
 ## Final check
 
 Before finalizing human-facing prose, search only the prose files and review every match manually:

@@ -38,6 +38,9 @@ Read only the references relevant to the task:
 - Write comments for intent, invariants, compatibility constraints, security decisions, or non-obvious failure behavior. Do not comment code that is already clear.
 - Treat repository-local instructions, architecture, naming, workflows, and project identity as constraints. Do not replace them with a preferred template without a reason.
 - Treat the user's requested implementation as a proposal to evaluate, not proof that it is the correct solution.
+- Separate task context from deliverable requirements. User-provided links, names, examples, and background references inform the work but are not automatically copied into code, README files, repository metadata, comments, or release notes.
+- Before carrying a prompt keyword or link into an artifact, check whether it belongs to the artifact's identity, dependency, attribution, or requested output. Otherwise keep it as context only.
+- Do not repeat project names, platform names, organization names, or source links merely because the prompt contains them.
 - Verify the underlying problem, current behavior, project fit, compatibility, maintenance cost, and security impact before implementing a significant change.
 - Prefer investigation when the available evidence is insufficient.
 - Push back respectfully when a request conflicts with evidence, project boundaries, security, licensing, or long-term maintenance.
