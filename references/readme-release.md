@@ -63,6 +63,17 @@ Inspect the repository's existing build path first. Depending on the project, ve
 
 Historical Poggit metadata can explain how an older project was built, but a new Axolotl-PM project should prefer a reproducible CI workflow when the repository supports it. Keep `.poggit.yml` for compatibility only when it is actually part of the requested distribution path.
 
+## Release promotion
+
+Use a candidate-first release process when the project publishes versioned artifacts.
+
+- Identify the repository's source of truth for the version. Do not update several version fields independently when one manifest or release configuration already owns it.
+- Build the candidate from the exact commit that is intended for release. Record the commit, artifact name, version, and relevant dependency revisions.
+- Verify the candidate artifact, manifest, resources, dependencies, namespace shading, and runtime entry point before creating or moving a release tag.
+- Promote the verified commit and artifact. Do not rebuild different bytes after verification and call them the same release. If a rebuild is necessary, verify it as a new candidate.
+- Create a release, tag, download badge, or latest-release claim only after the corresponding GitHub state and artifact actually exist.
+- Keep release notes focused on user-visible behavior, compatibility, migrations, and important fixes. Do not describe a release as stable when only a local build or an unverified CI job exists.
+
 ## Completion checklist
 
 Before reporting completion, confirm:

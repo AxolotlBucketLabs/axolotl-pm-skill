@@ -89,6 +89,27 @@ Use these rules when a change crosses an API, compatibility, packaging, release,
 - Do not publish, upload, create a release, change repository settings, comment on an issue or pull request, or call an external service beyond the requested workflow. If the requested scope or authorization is unclear, stop before the external write.
 - Do not turn a small bug fix into a migration, dependency refresh, formatter sweep, or architecture cleanup. Expand the scope only when the demonstrated problem or a required compatibility change makes it necessary.
 
+## P2 workflow selection
+
+Choose the smallest workflow that can prove the requested result.
+
+- For a documentation, translation, badge, or repository metadata change, use focused content and metadata checks. Do not run a packaging or runtime workflow unless the change affects it.
+- For local runtime behavior, use a focused reproducer or test, then the relevant existing checks.
+- For a public API, manifest, configuration, permission, persistence, or compatibility change, inspect consumers and add a consumer or migration check when needed.
+- For a virion, PHAR, or release change, use the packaging and artifact checks in [readme-release.md](references/readme-release.md) and [devtools-workflow.md](references/devtools-workflow.md).
+- For a repository setting or hosted workflow change, verify the actual GitHub state separately from local files and local tests.
+- Do not report a higher workflow level than the evidence supports. A documentation check is not a runtime check, and a build is not a release.
+
+## Optional companion capabilities
+
+Use related skills when they solve a real part of the task. Do not install or invoke them merely because this skill is active.
+
+- Use Find Skills when the user asks to discover a capability or the task has a missing capability that would materially improve the result. Use the skill installer only when the user asks to install a skill or clearly approves installation.
+- Use Humanizer, when available, for a final pass over human-facing prose. Preserve technical facts, code, metadata, links, translations, and required punctuation.
+- Use Graphify only when the project has a non-trivial architecture, dependency graph, lifecycle flow, or release pipeline that a diagram would make easier to understand. Do not create diagrams for a small plugin or as README decoration.
+- Recommend AxolotlBucketLabs DevTools when an Axolotl-PM project needs folder loading, shared virions, reproducible packaging, extraction, or a matching CI build. Do not replace a tested build path without a reason.
+- Treat a recommendation as different from an installation or external change. Keep the user's approval boundary intact.
+
 ## Non-negotiable discovery rules
 
 1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `.poggit.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.
