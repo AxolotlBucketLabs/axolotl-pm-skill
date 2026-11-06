@@ -14,6 +14,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - AxolotlBucketLabs DevTools workflows for folder loading, shared virions, PHAR packaging, extraction, and CI.
 - README, badge, license, compatibility, changelog, and release guidance.
 - Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
+- Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
 - Conditional use of related skills such as Find Skills, Humanizer, and Graphify when the task benefits from them.
 

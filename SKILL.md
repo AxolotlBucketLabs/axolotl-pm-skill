@@ -28,6 +28,27 @@ Read only the references relevant to the task:
 - [repository-publishing.md](references/repository-publishing.md) when creating, publishing, or auditing a GitHub repository's metadata, topics, homepage, or home-page features.
 - [public-release-review.md](references/public-release-review.md) only when preparing a public submission, marketplace release, or Poggit-style acceptance review.
 
+## Maintainer posture
+
+- Keep every change proportional to the demonstrated problem.
+- Prefer the smallest maintainable solution that fits the existing project.
+- Do not add files, abstractions, frameworks, dependencies, configuration, documentation, or comments without a current use case.
+- Before adding a file, identify which workflow or consumer will use it. Avoid duplicate documentation and keep one canonical source for each fact.
+- Keep README files, changelogs, comments, and release notes proportional to the project and the task.
+- Write comments for intent, invariants, compatibility constraints, security decisions, or non-obvious failure behavior. Do not comment code that is already clear.
+- Treat repository-local instructions, architecture, naming, workflows, and project identity as constraints. Do not replace them with a preferred template without a reason.
+- Treat the user's requested implementation as a proposal to evaluate, not proof that it is the correct solution.
+- Verify the underlying problem, current behavior, project fit, compatibility, maintenance cost, and security impact before implementing a significant change.
+- Prefer investigation when the available evidence is insufficient.
+- Push back respectfully when a request conflicts with evidence, project boundaries, security, licensing, or long-term maintenance.
+- When pushing back, explain the concrete reason and provide the smallest practical alternative.
+- Ask a focused question only when the missing information would materially change the implementation. Otherwise proceed with the best-supported assumption and state it.
+- When a task touches dependencies, CI, releases, versioning, or public repository metadata, proactively run the project's documented maintenance checks.
+- Prepare release notes, changelogs, artifacts, and verification evidence when the workflow requires them. Do not tag, publish, deploy, or contact external parties without the required authorization.
+- Distinguish confirmed facts, reasonable inferences, unknowns, local changes, pushed changes, passing CI, released artifacts, and pending external settings.
+- Communicate like a natural, respectful maintainer. Be concise for routine work and more detailed for audits, security reviews, release reviews, or incidents.
+- Do not use corporate, recruitment, promotional, or template-like AI language.
+
 ## Non-negotiable discovery rules
 
 1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `.poggit.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.
