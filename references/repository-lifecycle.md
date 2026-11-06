@@ -88,8 +88,10 @@ Use a curated changelog for users, not a dump of commit messages. Prefer the Kee
 ### Compatibility
 
 - Axolotl-PM API 5
-- PHP 8.4 or newer
+- PHP 8.4
 ```
+
+This example follows the AxolotlBucketLabs PHP 8.4 project default. Replace it with the target project's declared requirement when the project has an explicitly maintained compatibility range.
 
 Do not create empty change sections. Include only categories that contain a notable user-facing change. Mention migrations, breaking changes, security fixes, and important compatibility limits. Do not include internal work logs, every test count, or a list of unchanged files unless the release policy requires it.
 

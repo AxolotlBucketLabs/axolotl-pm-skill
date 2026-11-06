@@ -30,16 +30,19 @@ When sources disagree, use this order:
 
 Do not copy a version, namespace, signature, event, packet ID, or manifest field from an upstream PMMP example until the Axolotl-PM source confirms it.
 
-## PHP baseline
+## PHP baseline and project default
 
-Read the target server and project constraints instead of applying one PHP rule to every plugin or library.
+Read the target server and project constraints instead of silently changing an existing compatibility contract.
 
-- The current Axolotl-PM stable source declares PHP `^8.1`, requires 64-bit PHP, and requires additional server extensions. This is the server baseline, not an automatic requirement for every plugin.
+- The current Axolotl-PM stable source declares PHP `^8.1`, requires 64-bit PHP, and requires additional server extensions. This is the upstream server baseline. It is not the default runtime policy for new AxolotlBucketLabs projects.
+- AxolotlBucketLabs projects created or substantially migrated with this skill use PHP 8.4 as the default minimum and build runtime unless the user selects another target or an authoritative dependency requires a different range.
+- For the AxolotlBucketLabs default, use a Composer requirement such as `^8.4`, run the default build and static-analysis workflow on PHP 8.4, and state the resulting requirement in the README. Do not change an existing lower minimum without an explicit migration request and compatibility evidence.
 - Current Axolotl-PM PM 5.x PHP binaries identify PHP 8.4 as the recommended production runtime.
-- PHP 8.5 binaries are available, but their release notes warn that plugins may not work on that runtime. Test PHP 8.5 explicitly before claiming support.
-- The current Axolotl-PM CI matrix tests PHP 8.1 through PHP 8.5. CI coverage is evidence of testing, not a production recommendation.
-- Do not claim a universal maximum PHP version. Record the target project's own Composer and dependency constraints. Composer's `^8.1` constraint permits PHP 8.x and excludes PHP 9.x, subject to the rest of the dependency graph.
-- A plugin or virion must declare the narrowest PHP requirement supported by its code and dependencies. Do not raise the minimum only because the latest server binary uses a newer recommended runtime.
+- PHP 8.5 binaries are available, but their release notes warn that plugins may not work on that runtime. Treat PHP 8.5 as an optional compatibility target and test it explicitly before claiming support. It is not a universal maximum.
+- The current Axolotl-PM CI matrix tests PHP 8.1 through PHP 8.5. CI coverage is evidence of testing, not a reason to change a project's declared minimum.
+- Keep the declared minimum, tested versions, recommended runtime, build runtime, and unsupported range separate in the README and release notes.
+- Do not claim a universal maximum PHP version. Record the target project's own Composer and dependency constraints. Composer's `^8.4` constraint permits compatible PHP 8.x releases and excludes PHP 9.x, subject to the rest of the dependency graph.
+- A plugin or virion must declare the narrowest PHP requirement supported by its code and dependencies. Do not raise the minimum only because a newer server binary or build tool exists.
 
 Recheck these facts when the target branch, server release, PHP binaries, or dependency lock changes.
 

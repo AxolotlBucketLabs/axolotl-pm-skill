@@ -52,6 +52,8 @@ Keep the README easy to scan on GitHub. Apply the detailed prose and Markdown ru
 
 ## Compatibility claims
 
+Apply the PHP baseline and project default in [official-sources.md](official-sources.md#php-baseline-and-project-default).
+
 Separate these facts:
 
 - State the declared API floor.
