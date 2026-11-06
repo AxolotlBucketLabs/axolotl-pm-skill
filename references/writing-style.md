@@ -10,7 +10,7 @@ For normal English or Vietnamese project prose:
 - If a dash is genuinely needed, use the ASCII hyphen `-`.
 - Prefer rewriting the sentence with a period, comma, conjunction, or parentheses.
 - Limit colons in normal prose. Avoid label forms such as `Status: explanation` or `Result: details`.
-- Replace label forms with a complete sentence, such as `The workflow is still pending because the UI setting has not been checked.`
+- Replace label forms with a complete sentence, such as `The workflow is still pending`.
 - Avoid semicolon `;` in ordinary prose.
 - Use a period to split independent thoughts, or use a comma with a suitable conjunction.
 - Keep one main idea per sentence when a shorter sentence is clearer.
@@ -55,12 +55,12 @@ Before finishing a Markdown change, inspect the raw source and the rendered resu
 
 Keep routine pull request titles short and specific.
 
-The description should usually explain:
+The description should usually explain the following:
 
-- what problem was observed;
-- what changed;
-- what evidence was checked;
-- any compatibility or release risk that matters.
+- Explain what problem was observed.
+- Explain what changed.
+- Explain what evidence was checked.
+- Explain any compatibility or release risk that matters.
 
 Do not paste a complete command log, every test count, every internal reasoning step, or unrelated repository details into an ordinary pull request.
 
@@ -99,10 +99,10 @@ If the task involved a compatibility, packaging, release, or external system bou
 
 Do not apply these prose substitutions inside:
 
-- PHP, YAML, INI, JSON, Markdown syntax, shell commands, regular expressions, URLs, or identifiers;
-- license text, legal text, or direct quotations that must remain faithful;
-- localized translations when the target language's normal punctuation requires another form;
-- official names, package names, version ranges, or external metadata that must remain unchanged.
+- PHP, YAML, INI, JSON, Markdown syntax, shell commands, regular expressions, URLs, or identifiers.
+- License text, legal text, or direct quotations that must remain faithful.
+- Localized translations when the target language's normal punctuation requires another form.
+- Official names, package names, version ranges, or external metadata that must remain unchanged.
 
 ## Final check
 

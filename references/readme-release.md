@@ -27,7 +27,7 @@ limitations/compatibility
 license and asset notes
 ```
 
-Use code examples that match the current method signatures. A short README is acceptable for a small plugin; a reusable library should usually include at least one complete consumer example.
+Use code examples that match the current method signatures. A short README is acceptable for a small plugin. A reusable library should usually include at least one complete consumer example.
 
 ## README Markdown structure
 
@@ -45,20 +45,20 @@ Keep the README easy to scan on GitHub. Apply the detailed prose and Markdown ru
 
 - Put badges in a left-aligned block immediately below the project identity and short description. This keeps status information close to the project overview and wraps naturally on narrow screens.
 - For a repository with GitHub Actions, add a CI badge linking to the workflow. For a repository that publishes GitHub Releases, add a release badge linking to the latest release.
-- Use a license badge for the repository's actual license. Add a Discord badge only when the project has a real invite URL and server ID; never leave a placeholder or invent a community link.
+- Use a license badge for the repository's actual license. Add a Discord badge only when the project has a real invite URL and server ID. Never leave a placeholder or invent a community link.
 - Prefer two badge rows when needed: CI/release/license/community first, then platform, PHP, API, locale, or package metadata.
-- Use MIT as the default license for new original plugin/library code when the user has not selected another license. Do not relicense copied or bundled third-party code; preserve its original license and attribution.
+- Use MIT as the default license for new original plugin or library code when the user has not selected another license. Do not relicense copied or bundled third-party code. Preserve its original license and attribution.
 - A badge must describe a verifiable state or destination. Do not add download, release, coverage, or community badges that have no corresponding artifact or service.
 
 ## Compatibility claims
 
 Separate these facts:
 
-- declared API floor;
-- PHP version and extensions;
-- exact dependency revision used by development/CI;
-- revisions actually tested;
-- revisions believed compatible but not independently tested.
+- State the declared API floor.
+- State the PHP version and extensions.
+- State the exact dependency revision used by development and CI.
+- State the revisions that were actually tested.
+- State the revisions believed compatible but not independently tested.
 
 Do not turn "the API constraint is `^5.0.0`" into "every Axolotl-PM 5.x release is verified". Update the README when implementation uses a newer method, changed packet behavior, extension, or resource-pack assumption.
 
@@ -66,12 +66,12 @@ Do not turn "the API constraint is `^5.0.0`" into "every Axolotl-PM 5.x release 
 
 Inspect the repository's existing build path first. Depending on the project, verify:
 
-- `composer install` or the documented dependency setup;
-- PHP lint and static analysis;
-- unit/integration or consumer smoke tests;
-- AxolotlBucketLabs DevTools or the repository's pinned DevTools/VirionTools build with the exact revision selected for the target;
-- PHAR contents, manifest, autoload, shaded namespaces, and resources;
-- artifact name, version, changelog, license, and release notes.
+- Run `composer install` or the documented dependency setup.
+- Run PHP lint and static analysis.
+- Run unit or integration tests and a consumer smoke test when applicable.
+- Run AxolotlBucketLabs DevTools or the repository's pinned DevTools or VirionTools build with the exact revision selected for the target.
+- Inspect PHAR contents, the manifest, autoloading, shaded namespaces, and resources.
+- Confirm the artifact name, version, changelog, license, and release notes.
 
 Historical Poggit metadata can explain how an older project was built, but a new Axolotl-PM project should prefer a reproducible CI workflow when the repository supports it. Keep `.poggit.yml` for compatibility only when it is actually part of the requested distribution path.
 
@@ -90,10 +90,10 @@ Use a candidate-first release process when the project publishes versioned artif
 
 Before reporting completion, confirm:
 
-- the requested behavior is implemented;
-- the target API was checked from the actual dependency/source;
-- code and manifests agree;
-- README examples run against the current API;
-- tests/lint/static analysis/build were run when available;
-- the final artifact was inspected when packaging was part of the task;
-- unsupported compatibility or untested paths are stated explicitly.
+- Confirm that the requested behavior is implemented.
+- Confirm that the target API was checked from the actual dependency or source.
+- Confirm that code and manifests agree.
+- Confirm that README examples run against the current API.
+- Confirm that tests, lint, static analysis, and build checks were run when available.
+- Confirm that the final artifact was inspected when packaging was part of the task.
+- State unsupported compatibility or untested paths explicitly.

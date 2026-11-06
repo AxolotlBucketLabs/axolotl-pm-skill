@@ -100,6 +100,7 @@ class MarkdownPolicyTests(unittest.TestCase):
                 encoding="utf-8",
             )
             (root / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Instructions\n", encoding="utf-8")
             (root / "references").mkdir()
 
             VALIDATOR.validate_markdown_fences(root)
@@ -109,10 +110,43 @@ class MarkdownPolicyTests(unittest.TestCase):
             root = Path(directory)
             (root / "README.md").write_text("# Example\n\n```php\n", encoding="utf-8")
             (root / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Instructions\n", encoding="utf-8")
             (root / "references").mkdir()
 
             with self.assertRaisesRegex(SystemExit, "unclosed"):
                 VALIDATOR.validate_markdown_fences(root)
+
+    def write_prose_fixture(self, root: Path, text: str) -> None:
+        (root / "README.md").write_text(text, encoding="utf-8")
+        (root / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+        (root / "AGENTS.md").write_text("# Instructions\n", encoding="utf-8")
+        (root / "references").mkdir()
+
+    def test_valid_prose_ignores_code_and_inline_literals(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_prose_fixture(
+                root,
+                "# Example\n\n- Use `;` in the regular expression.\n\n```php\n$value = 1;\n```\n",
+            )
+
+            VALIDATOR.validate_prose_style(root)
+
+    def test_semicolon_in_prose_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_prose_fixture(root, "# Example\n\nThis sentence has a semicolon; here.\n")
+
+            with self.assertRaisesRegex(SystemExit, "forbidden prose punctuation"):
+                VALIDATOR.validate_prose_style(root)
+
+    def test_lowercase_bullet_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_prose_fixture(root, "# Example\n\n- start with lowercase.\n")
+
+            with self.assertRaisesRegex(SystemExit, "lowercase prose"):
+                VALIDATOR.validate_prose_style(root)
 
 
 if __name__ == "__main__":

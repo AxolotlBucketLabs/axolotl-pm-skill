@@ -29,6 +29,7 @@ axolotl-pm-skill/
 │   ├── dependabot.yml
 │   └── workflows/
 │       └── validate.yml
+├── AGENTS.md
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -69,7 +70,7 @@ Run the repository validator after editing the skill:
 python scripts/validate_skill.py
 ```
 
-The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, Markdown fence boundaries, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
+The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, Markdown fence boundaries, prose punctuation, checklist bullets, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
 
 Run the validator regression tests with:
 

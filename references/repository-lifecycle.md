@@ -39,12 +39,12 @@ Keep each commit focused on one logical change. Split unrelated documentation, f
 
 Do not put these into an ordinary commit message:
 
-- the prompt or a user's private context.
-- an agent identity or generated-by notice.
-- a work log or tool transcript.
-- a date recording when the agent edited the file.
-- claims about tests, CI, or releases that were not actually checked.
-- promotional wording such as "fully modernized" or "production ready".
+- Exclude the prompt or a user's private context.
+- Exclude an agent identity or generated-by notice.
+- Exclude a work log or tool transcript.
+- Exclude a date recording when the agent edited the file.
+- Exclude claims about tests, CI, or releases that were not actually checked.
+- Exclude promotional wording such as "fully modernized" or "production ready".
 
 Breaking changes belong in a `BREAKING CHANGE:` footer or the repository's established equivalent. Issue and pull request references belong in the footer when they are useful to the project.
 
@@ -64,7 +64,7 @@ Apply the SemVer change rules:
 - PATCH for a backward-compatible bug fix.
 - MINOR for backward-compatible public functionality or a deprecation.
 - MAJOR for a breaking public API or behavior change.
-- a prerelease such as `1.2.3-beta.1` only when the artifact is intentionally unstable.
+- Use a prerelease such as `1.2.3-beta.1` only when the artifact is intentionally unstable.
 
 Once a release is published, do not change its contents and keep moving the same version tag. Create a new version for every correction.
 
@@ -135,12 +135,12 @@ Do not add dates to README files, source comments, headings, or ordinary documen
 
 Use dates only when they are part of the information contract, such as:
 
-- a published release or changelog entry.
-- a security advisory.
-- a migration deadline.
-- an archived compatibility snapshot.
-- a protocol or server support timeline.
-- a policy that has an explicit review process.
+- Use a date for a published release or changelog entry.
+- Use a date for a security advisory.
+- Use a date for a migration deadline.
+- Use a date for an archived compatibility snapshot.
+- Use a date for a protocol or server support timeline.
+- Use a date for a policy that has an explicit review process.
 
 Do not add `Last updated` unless the document has a real maintenance reason and a person or workflow will update it. Prefer a tested compatibility statement such as `Tested against Axolotl-PM 5.51.1` over a vague freshness label.
 
@@ -168,11 +168,11 @@ Do not treat a YAML parse, local linter, or generated artifact as proof that the
 
 Before reporting a repository or release task as complete, check the layers that apply:
 
-- repository name, owner, visibility, description, homepage, topics, branch, and license.
-- README identity, badges, links, examples, and compatibility claims.
-- commit and pull request text for prompt context, dates, verbosity, and unsupported claims.
-- manifest, package, tag, changelog, release, and artifact version agreement.
-- action freshness, full SHA pins, runner compatibility, permissions, and workflow result.
-- candidate artifact contents, runtime behavior, hosted CI, and public release state separately.
+- Check the repository name, owner, visibility, description, homepage, topics, branch, and license.
+- Check README identity, badges, links, examples, and compatibility claims.
+- Check commit and pull request text for prompt context, dates, verbosity, and unsupported claims.
+- Check manifest, package, tag, changelog, release, and artifact version agreement.
+- Check action freshness, full SHA pins, runner compatibility, permissions, and workflow result.
+- Check candidate artifact contents, runtime behavior, hosted CI, and public release state separately.
 
 Report any layer that was not checked instead of treating a nearby check as proof.

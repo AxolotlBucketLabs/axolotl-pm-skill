@@ -28,7 +28,7 @@ Do not add `resources/`, tests, Composer, or a new framework just because a hist
 
 - Put user-editable defaults in `resources/config.yml` or the repository's established resource path.
 - Keep config keys, defaults, validation, and README examples synchronized.
-- Version or migrate configuration when changing its shape; do not silently discard existing user values.
+- Version or migrate configuration when changing its shape. Do not silently discard existing user values.
 - For language files, SQL schema, resource packs, or other assets, verify that the build includes the files and that runtime paths work inside a PHAR.
 
 ## Commands, permissions, and dependencies

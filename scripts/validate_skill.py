@@ -15,6 +15,12 @@ ACTION_USE_RE = re.compile(
     r"^\s*uses:\s*([^\s]+)@([^\s#]+)(?:\s+#\s*(.*?))?\s*$"
 )
 FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
+INLINE_CODE_RE = re.compile(r"`+[^`\n]+`+")
+FORBIDDEN_PROSE_RE = re.compile(r"[—–;“”‘’]")
+LOWERCASE_BULLET_RE = re.compile(r"^\s*[-*+]\s+[a-z]")
+LABEL_PROSE_RE = re.compile(
+    r"^\s*(?:Status|Result|Verification|Notes|Reason|Output|Summary)\s*:\s+\S"
+)
 FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 VERSION_COMMENT_RE = re.compile(r"^v[0-9]+(?:\.[0-9]+){0,2}(?:[-+][0-9A-Za-z.-]+)?$")
 MUTABLE_ACTION_REFS = {"HEAD", "develop", "dev", "latest", "main", "master"}
@@ -63,7 +69,7 @@ def validate_dependabot(skill_dir: Path) -> None:
 
 
 def validate_markdown_fences(skill_dir: Path) -> None:
-    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md"]
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
     markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
 
     for markdown_file in markdown_files:
@@ -93,15 +99,52 @@ def validate_markdown_fences(skill_dir: Path) -> None:
             )
 
 
+def validate_prose_style(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        in_fence = False
+        fence_marker = ""
+        fence_length = 0
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            fence_match = FENCE_RE.match(line)
+            if fence_match is not None:
+                fence, suffix = fence_match.groups()
+                marker = fence[0]
+                length = len(fence)
+                if not in_fence:
+                    in_fence = True
+                    fence_marker = marker
+                    fence_length = length
+                elif marker == fence_marker and length >= fence_length and not suffix.strip():
+                    in_fence = False
+                continue
+
+            if in_fence or line.startswith(("    ", "\t")):
+                continue
+
+            prose = INLINE_CODE_RE.sub("", line)
+            if FORBIDDEN_PROSE_RE.search(prose):
+                fail(f"{markdown_file.name}:{line_number} contains forbidden prose punctuation")
+            if LOWERCASE_BULLET_RE.match(prose):
+                fail(f"{markdown_file.name}:{line_number} starts a bullet with lowercase prose")
+            if LABEL_PROSE_RE.match(prose):
+                fail(f"{markdown_file.name}:{line_number} uses label-shaped prose")
+
+
 def main() -> int:
     skill_dir = Path(__file__).resolve().parents[1]
     skill_file = skill_dir / "SKILL.md"
     ui_file = skill_dir / "agents" / "openai.yaml"
+    agents_file = skill_dir / "AGENTS.md"
 
     if not skill_file.is_file():
         fail("SKILL.md is missing")
     if not ui_file.is_file():
         fail("agents/openai.yaml is missing")
+    if not agents_file.is_file():
+        fail("AGENTS.md is missing")
 
     skill_text = skill_file.read_text(encoding="utf-8")
     if not skill_text.startswith("---\n"):
@@ -132,6 +175,7 @@ def main() -> int:
             fail(f"referenced file does not exist: {reference}")
 
     validate_markdown_fences(skill_dir)
+    validate_prose_style(skill_dir)
     validate_workflows(skill_dir)
     validate_dependabot(skill_dir)
 
