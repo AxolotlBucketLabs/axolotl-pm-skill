@@ -14,6 +14,7 @@ REFERENCE_RE = re.compile(r"\]\((references/[^)]+)\)")
 ACTION_USE_RE = re.compile(
     r"^\s*uses:\s*([^\s]+)@([^\s#]+)(?:\s+#\s*(.*?))?\s*$"
 )
+FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 VERSION_COMMENT_RE = re.compile(r"^v[0-9]+(?:\.[0-9]+){0,2}(?:[-+][0-9A-Za-z.-]+)?$")
 MUTABLE_ACTION_REFS = {"HEAD", "develop", "dev", "latest", "main", "master"}
@@ -61,6 +62,37 @@ def validate_dependabot(skill_dir: Path) -> None:
         fail(".github/dependabot.yml must monitor the repository root")
 
 
+def validate_markdown_fences(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        open_fence: tuple[str, int, int] | None = None
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            match = FENCE_RE.match(line)
+            if match is None:
+                continue
+
+            fence, suffix = match.groups()
+            marker = fence[0]
+            length = len(fence)
+            if open_fence is None:
+                open_fence = (marker, length, line_number)
+                continue
+
+            open_marker, open_length, open_line = open_fence
+            if marker != open_marker or length < open_length or suffix.strip():
+                continue
+            open_fence = None
+
+        if open_fence is not None:
+            marker, length, line_number = open_fence
+            fail(
+                f"{markdown_file.name}:{line_number} has an unclosed "
+                f"{length}-character {marker} Markdown fence"
+            )
+
+
 def main() -> int:
     skill_dir = Path(__file__).resolve().parents[1]
     skill_file = skill_dir / "SKILL.md"
@@ -99,6 +131,7 @@ def main() -> int:
         if not (skill_dir / reference).is_file():
             fail(f"referenced file does not exist: {reference}")
 
+    validate_markdown_fences(skill_dir)
     validate_workflows(skill_dir)
     validate_dependabot(skill_dir)
 

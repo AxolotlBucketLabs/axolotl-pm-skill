@@ -15,6 +15,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - README, badge, license, compatibility, changelog, and release guidance.
 - Repository identity, commit messages, version mapping, release notes, README scope, date hygiene, and CI freshness.
 - Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
+- GitHub Flavored Markdown structure for inline code, fenced code, tables, alerts, links, and collapsed details.
 - Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
 - Official Axolotl-PM documentation, source, community, PHP runtime, API version, and Bedrock protocol references.
@@ -68,7 +69,7 @@ Run the repository validator after editing the skill:
 python scripts/validate_skill.py
 ```
 
-The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
+The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, Markdown fence boundaries, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
 
 Run the validator regression tests with:
 

@@ -29,6 +29,18 @@ license and asset notes
 
 Use code examples that match the current method signatures. A short README is acceptable for a small plugin; a reusable library should usually include at least one complete consumer example.
 
+## README Markdown structure
+
+Keep the README easy to scan on GitHub. Apply the detailed prose and Markdown rules in [writing-style.md](writing-style.md), then use the following artifact-specific choices:
+
+- Put badges near the project identity. Keep them on one or two compact lines and link each badge to a real destination.
+- Put commands, permissions, configuration keys, compatibility versions, and artifact details in a table when there are several repeated entries.
+- Put installation commands in a fenced `sh` block and code examples in a fenced block with the correct language tag.
+- Use `<details>` for long troubleshooting sections, build logs, or optional implementation detail. Keep the summary useful without requiring the reader to expand it.
+- Use a GitHub alert only for a compatibility limit, migration step, security warning, or other information that can block a successful installation or upgrade.
+- If an example contains nested Markdown code fences, use a longer outer fence or a tilde fence so the inner content cannot close the outer block early.
+- Do not put the whole README inside a code block. The document must remain navigable and its links, headings, tables, and examples must render normally.
+
 ## README badges and license defaults
 
 - Put badges in a left-aligned block immediately below the project identity and short description. This keeps status information close to the project overview and wraps naturally on narrow screens.

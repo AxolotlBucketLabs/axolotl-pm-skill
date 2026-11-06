@@ -91,5 +91,29 @@ class DependabotPolicyTests(unittest.TestCase):
                 VALIDATOR.validate_dependabot(root)
 
 
+class MarkdownPolicyTests(unittest.TestCase):
+    def test_balanced_fences_are_accepted(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text(
+                "# Example\n\n```php\n<?php\n```\n",
+                encoding="utf-8",
+            )
+            (root / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+            (root / "references").mkdir()
+
+            VALIDATOR.validate_markdown_fences(root)
+
+    def test_unclosed_fence_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text("# Example\n\n```php\n", encoding="utf-8")
+            (root / "SKILL.md").write_text("# Example\n", encoding="utf-8")
+            (root / "references").mkdir()
+
+            with self.assertRaisesRegex(SystemExit, "unclosed"):
+                VALIDATOR.validate_markdown_fences(root)
+
+
 if __name__ == "__main__":
     unittest.main()

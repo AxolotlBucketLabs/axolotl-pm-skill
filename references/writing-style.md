@@ -18,6 +18,25 @@ For normal English or Vietnamese project prose:
 
 These rules target overuse. They do not claim that a Unicode dash or semicolon is invalid in every human publication. The project style should avoid them by default because they often make generated text sound formal, compressed, or artificial.
 
+## GitHub Markdown structure
+
+Use GitHub Flavored Markdown as a semantic format. Choose the structure that helps the reader understand or act on the information. Do not add Markdown features only to make a document look richer.
+
+- Wrap literal file names, paths, classes, interfaces, methods, functions, variables, commands, permissions, manifest keys, and versions in one pair of inline backticks.
+- Use a fenced code block for multiline code, configuration, commands, logs, patches, and output that a reader may copy. Add a language tag when the language is known.
+- Keep the opening and closing fence paired. Use the same fence character for both sides and do not close a block before its content ends.
+- Do not place code directly in prose when the reader needs to copy it or distinguish it from the surrounding sentence.
+- Use headings for document structure. Do not use bold text as a substitute for a heading.
+- Use a table for repeated fields such as commands, permissions, configuration keys, API entries, or compatibility versions when a table is easier to scan than a list.
+- Use a list for independent points. Do not turn a short list into a table without a readability benefit.
+- Use descriptive links and repository-relative links when they are stable. Prefer GitHub issue, pull request, commit, and file references when they give the reader useful context.
+- Use `<details>` with a useful `<summary>` for long logs, optional troubleshooting, and technical detail that most readers do not need immediately.
+- Use GitHub alerts only for information that affects installation, compatibility, security, migration, or another important user decision. Do not use alerts as decoration.
+
+When Markdown contains another Markdown document or a nested code block, use a longer outer fence or a tilde fence. Do not wrap both levels with the same triple backtick fence. Do not extract LLM output by splitting on the literal triple-backtick delimiter because a nested fence or a backtick inside a string can truncate valid content.
+
+Before finishing a Markdown change, inspect the raw source and the rendered result when a preview or parser is available. Check that fences are paired, inline code is closed, language tags are accurate, links are readable, tables have valid separators, and `<details>` blocks have matching tags. Correct content does not prove that its Markdown boundaries are correct.
+
 ## Voice and structure
 
 - Prefer active voice and concrete statements.
