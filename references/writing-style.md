@@ -66,6 +66,10 @@ A CI summary such as `105 tests and 504 assertions` is useful when the number is
 
 If the repository has a pull request template, follow it. This rule prevents an agent from writing more detail than the project requires.
 
+When creating a pull request with GitHub CLI, do not use generated title and body text without reviewing it. In particular, treat `gh pr create --fill` as unsafe for final prose because commit messages can contain private task context or details that do not belong in the public pull request.
+
+Do not paste a full verification transcript into a routine pull request. Include the checks that matter to the change and mention a limitation when a required check could not run.
+
 ## Exceptions
 
 Do not apply these prose substitutions inside:

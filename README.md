@@ -32,8 +32,10 @@ axolotl-pm-skill/
 │   ├── public-release-review.md
 │   ├── quality-and-security-rules.md
 │   ├── readme-release.md
+│   ├── repository-publishing.md
 │   ├── style-and-naming.md
-│   └── virion-workflow.md
+│   ├── virion-workflow.md
+│   └── writing-style.md
 └── scripts/
     └── validate_skill.py
 ```

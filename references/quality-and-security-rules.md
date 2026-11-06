@@ -70,6 +70,8 @@ For a bug fix:
 
 Prefer assertions against observable behavior, public APIs, persisted data, emitted events, generated artifacts, or runtime output. Do not mock the logic being tested or assert private implementation details unless the repository's contract requires it.
 
+Do not make an existing test easier to satisfy in order to make a change pass. Do not delete a case, weaken an assertion, broaden an expected value, skip a test, replace a real dependency with a mock, or change test configuration without a demonstrated reason that belongs to the project contract. If a test passes both before and after a bug fix, it does not yet prove the fix.
+
 Avoid tests that:
 
 - only cover the happy path when the bug is in a failure path;
@@ -86,6 +88,8 @@ If the baseline cannot be executed, state that limitation. Do not claim that the
 ## Contract-aware defensive coding
 
 Add defensive checks at trust boundaries and integration points, not around every internal operation.
+
+Do not add hypothetical sanitization, validation, redaction, logging, fallback behavior, or exception handling without a demonstrated failure, an explicit contract, or a required security boundary. Speculative defenses can hide the real invariant and change behavior that was already correct.
 
 - Use a null check only when null is valid according to the contract.
 - Use `isset()` only when missing data has a meaningful behavior.
