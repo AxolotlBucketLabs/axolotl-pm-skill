@@ -6,7 +6,7 @@ Use the repository's existing layout. A conventional plugin has:
 
 ```text
 plugin.yml
-.poggit.yml or a CI build workflow
+CI build workflow
 README.md
 LICENSE
 resources/

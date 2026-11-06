@@ -1,6 +1,6 @@
 # Quality and security rules
 
-Use this reference for implementation and code review. These rules are adapted from the user-provided [Poggit submission rules](https://gist.github.com/NhanAZ/992c5ba4211252d202d8d4e8aac080c6), but they are written as Axolotl-PM/PMMP engineering guidance rather than marketplace policy.
+Use this reference for implementation and code review. These rules are written as Axolotl-PM and PMMP engineering guidance, not as marketplace policy.
 
 ## Must: preserve readable, collision-safe code
 

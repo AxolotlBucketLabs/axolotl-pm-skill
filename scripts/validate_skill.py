@@ -21,6 +21,7 @@ LOWERCASE_BULLET_RE = re.compile(r"^\s*[-*+]\s+[a-z]")
 LABEL_PROSE_RE = re.compile(
     r"^\s*(?:Status|Result|Verification|Notes|Reason|Output|Summary)\s*:\s+\S"
 )
+RESEARCH_CONTEXT_RE = re.compile(r"(?i)\bPoggit\b|992c5ba4211252d202d8d4e8aac080c6")
 FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 VERSION_COMMENT_RE = re.compile(r"^v[0-9]+(?:\.[0-9]+){0,2}(?:[-+][0-9A-Za-z.-]+)?$")
 MUTABLE_ACTION_REFS = {"HEAD", "develop", "dev", "latest", "main", "master"}
@@ -133,6 +134,16 @@ def validate_prose_style(skill_dir: Path) -> None:
                 fail(f"{markdown_file.name}:{line_number} uses label-shaped prose")
 
 
+def validate_context_boundaries(skill_dir: Path) -> None:
+    markdown_files = [skill_dir / "README.md", skill_dir / "SKILL.md", skill_dir / "AGENTS.md"]
+    markdown_files.extend(sorted((skill_dir / "references").glob("*.md")))
+
+    for markdown_file in markdown_files:
+        for line_number, line in enumerate(markdown_file.read_text(encoding="utf-8").splitlines(), 1):
+            if RESEARCH_CONTEXT_RE.search(line):
+                fail(f"{markdown_file.name}:{line_number} contains research-only context")
+
+
 def main() -> int:
     skill_dir = Path(__file__).resolve().parents[1]
     skill_file = skill_dir / "SKILL.md"
@@ -176,6 +187,7 @@ def main() -> int:
 
     validate_markdown_fences(skill_dir)
     validate_prose_style(skill_dir)
+    validate_context_boundaries(skill_dir)
     validate_workflows(skill_dir)
     validate_dependabot(skill_dir)
 

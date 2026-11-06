@@ -8,6 +8,7 @@ These instructions apply only to the `axolotl-pm-skill` repository. Read them to
 - Keep one canonical rule in one place. Link to it instead of copying a second version into another reference.
 - Review all human-facing Markdown files after a policy change. Do not review only the lines changed by the current diff.
 - Keep examples, validator behavior, README structure, and repository instructions consistent.
+- Keep research-only names and links out of canonical documentation unless the deliverable explicitly requires them.
 
 ## Prose and Markdown
 

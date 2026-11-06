@@ -148,6 +148,14 @@ class MarkdownPolicyTests(unittest.TestCase):
             with self.assertRaisesRegex(SystemExit, "lowercase prose"):
                 VALIDATOR.validate_prose_style(root)
 
+    def test_research_context_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.write_prose_fixture(root, "# Example\n\nPoggit is research context only.\n")
+
+            with self.assertRaisesRegex(SystemExit, "research-only context"):
+                VALIDATOR.validate_context_boundaries(root)
+
 
 if __name__ == "__main__":
     unittest.main()

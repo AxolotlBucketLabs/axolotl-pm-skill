@@ -21,7 +21,7 @@ Use `rg --files` and targeted `rg` searches. Inspect:
 - Inspect `composer.json` and `composer.lock` for PHP, server, library, and analysis constraints.
 - Inspect `plugin.yml` for plugin identity, main class, API, commands, permissions, dependencies, and load behavior.
 - Inspect `virion.yml` for `antigen`, version, API, PHP, and virion dependency metadata.
-- Inspect `devtools.yml` and `.poggit.yml` for virion injection, build paths, and release behavior.
+- Inspect `devtools.yml` for virion injection, build paths, and release behavior.
 - Inspect `.github/workflows/` for pinned builders, test matrices, artifact names, and release gates.
 - Inspect `README*`, `LICENSE`, `resources/`, `tests/`, `examples/`, and `docs/`.
 - Inspect representative classes in `src/`, especially the entry point and one class from each major subsystem.

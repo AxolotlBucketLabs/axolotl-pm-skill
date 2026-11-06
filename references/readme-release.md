@@ -73,7 +73,7 @@ Inspect the repository's existing build path first. Depending on the project, ve
 - Inspect PHAR contents, the manifest, autoloading, shaded namespaces, and resources.
 - Confirm the artifact name, version, changelog, license, and release notes.
 
-Historical Poggit metadata can explain how an older project was built, but a new Axolotl-PM project should prefer a reproducible CI workflow when the repository supports it. Keep `.poggit.yml` for compatibility only when it is actually part of the requested distribution path.
+Historical marketplace metadata can explain how an older project was built, but a new Axolotl-PM project should prefer a reproducible CI workflow when the repository supports it. Keep legacy marketplace configuration only when it is part of the requested distribution path.
 
 ## Release promotion
 

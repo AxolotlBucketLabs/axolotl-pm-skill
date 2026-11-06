@@ -1,8 +1,6 @@
 # Public release and marketplace review
 
-Read this reference only when the user asks to prepare a public release, submit to Poggit or another marketplace, or review whether a plugin is publishable. These are release-policy checks, not universal coding rules.
-
-The source basis is the user-provided [Poggit submission rules](https://gist.github.com/NhanAZ/992c5ba4211252d202d8d4e8aac080c6). Recheck the destination marketplace's current policy before submission. Do not assume historical Poggit policy is current or applies to Axolotl-PM.
+Read this reference only when the user asks to prepare a public release, submit to a marketplace, or review whether a plugin is publishable. These are release-policy checks, not universal coding rules. Recheck the destination's current policy before submission.
 
 ## Purpose and scope
 
