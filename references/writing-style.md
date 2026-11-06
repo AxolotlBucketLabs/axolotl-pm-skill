@@ -59,12 +59,20 @@ The description should usually explain the following:
 
 - Explain what problem was observed.
 - Explain what changed.
-- Explain what evidence was checked.
+- Mention the checks that help the reviewer evaluate this change.
 - Explain any compatibility or release risk that matters.
 
 Do not paste a complete command log, every test count, every internal reasoning step, or unrelated repository details into an ordinary pull request.
 
-Use more detailed verification when the project requires it for a security review, release review, incident, or compatibility change.
+Do not add a `Verification` heading to every pull request. GitHub does not require that heading, and a pull request body is not a CI transcript.
+
+Read the repository's pull request template before writing the description. Follow a project-specific `Testing`, `Verification`, or equivalent section when the template requires it. Do not create a new section only because another pull request used one.
+
+For an ordinary pull request, a short sentence or compact list of relevant checks is enough. Use a dedicated evidence section only when the change has a meaningful review boundary that the diff or GitHub Checks cannot show, such as runtime behavior, PHAR contents, release provenance, migrations, security reproductions, or compatibility matrices.
+
+For documentation, badge, metadata, formatting, translation, or reference-only changes, use focused checks and usually omit a verification section. Mention a limitation when a required check could not run, but do not list every unavailable or unrelated tool.
+
+Use more detailed verification when the project requires it for a security review, release review, incident, or compatibility change. Keep that detail proportional to the reviewer's actual need.
 
 Avoid vague descriptions such as:
 
