@@ -55,6 +55,67 @@ Use this reference for implementation and code review. These rules are adapted f
 - Close or unregister resources in the appropriate lifecycle method. Cleanup should be safe to call from error paths when practical.
 - Do not silently swallow errors that leave a feature partially active. Report a useful diagnostic and choose a safe fallback.
 
+## Test quality and regression evidence
+
+A test must protect a project contract or a demonstrated regression. Do not add a test only to increase the test count.
+
+For a bug fix:
+
+- reproduce the failure on the baseline implementation when the baseline is available;
+- make the focused test or reproducer fail before the fix;
+- implement the smallest fix;
+- make the focused test pass after the fix;
+- run the relevant existing test suite and static analysis;
+- confirm that the test would fail if the bug were reintroduced.
+
+Prefer assertions against observable behavior, public APIs, persisted data, emitted events, generated artifacts, or runtime output. Do not mock the logic being tested or assert private implementation details unless the repository's contract requires it.
+
+Avoid tests that:
+
+- only cover the happy path when the bug is in a failure path;
+- repeat an existing test without adding a distinct contract;
+- assert a constant or implementation detail instead of behavior;
+- pass even when the reported bug is restored;
+- only confirm that a mock returned the value configured by the test;
+- test framework behavior rather than project behavior.
+
+Mutation testing is recommended for behavior-heavy libraries, parsers, security-sensitive code, and public APIs when the project already supports it. It is not a universal requirement for a small plugin, a translation-only change, documentation work, or a repository configuration change.
+
+If the baseline cannot be executed, state that limitation. Do not claim that the regression test was proven against the old implementation.
+
+## Contract-aware defensive coding
+
+Add defensive checks at trust boundaries and integration points, not around every internal operation.
+
+- Use a null check only when null is valid according to the contract.
+- Use `isset()` only when missing data has a meaningful behavior.
+- Do not catch an exception unless the code can recover, add useful context, translate the failure, or perform required cleanup.
+- Do not catch `Throwable` broadly to hide a broken invariant.
+- Do not add guards only to satisfy static analysis.
+- Preserve established invariants instead of weakening the contract to tolerate impossible states.
+- When an impossible state indicates a programmer error, prefer a clear failure over a silent fallback.
+
+## Semantic correctness
+
+Before changing logic, identify the assumptions that make the current design correct.
+
+Check:
+
+- ownership of state;
+- lifecycle ordering;
+- event ordering and cancellation;
+- threading and async boundaries;
+- namespace and shading boundaries;
+- version and API contracts;
+- resource cleanup;
+- permission and command semantics;
+- fallback behavior;
+- persistence and serialization formats.
+
+Do not change a local condition, return value, event priority, exception path, or lifecycle hook without checking its callers, consumers, tests, and related invariants.
+
+A simpler-looking implementation is not an improvement if it violates an invariant or changes the meaning of the public contract.
+
 ## Compatibility rule for Axolotl-PM
 
 Do not import the historical rule "unofficial server software is unsupported" as a blanket ban. Axolotl-PM is itself the target in this skill. Instead:

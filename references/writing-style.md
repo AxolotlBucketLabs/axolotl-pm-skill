@@ -32,6 +32,40 @@ These rules target overuse. They do not claim that a Unicode dash or semicolon i
 - When reporting an achievement, include the relevant evidence and context instead of self-praise.
 - Keep routine reviews short. Add detail when the task is an audit, security review, release review, or incident investigation.
 
+## Pull request writing
+
+Keep routine pull request titles short and specific.
+
+The description should usually explain:
+
+- what problem was observed;
+- what changed;
+- what evidence was checked;
+- any compatibility or release risk that matters.
+
+Do not paste a complete command log, every test count, every internal reasoning step, or unrelated repository details into an ordinary pull request.
+
+Use more detailed verification when the project requires it for a security review, release review, incident, or compatibility change.
+
+Avoid vague descriptions such as:
+
+- Improve robustness and handle edge cases.
+- Fix several issues.
+- Update implementation.
+- Make the code better.
+
+Prefer a concrete description such as:
+
+```text
+Fix typed catch handling in the shaded PHAR
+
+The shaded catch path was not matched at runtime because the generated namespace was not included in the handler. The change updates the narrow handler and verifies the packaged PHAR with the focused runtime test and PHPStan.
+```
+
+A CI summary such as `105 tests and 504 assertions` is useful when the number is relevant to the review. It should not be included only to make the pull request appear more complete.
+
+If the repository has a pull request template, follow it. This rule prevents an agent from writing more detail than the project requires.
+
 ## Exceptions
 
 Do not apply these prose substitutions inside:

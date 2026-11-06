@@ -52,6 +52,18 @@ Read only the references relevant to the task:
 - Communicate like a natural, respectful maintainer. Be concise for routine work and more detailed for audits, security reviews, release reviews, or incidents.
 - Do not use corporate, recruitment, promotional, or template-like AI language.
 
+## Change discipline
+
+Use this workflow for non-trivial changes:
+
+1. Research before editing. Inspect repository instructions, similar implementations, call sites, dependencies, tests, invariants, and compatibility boundaries. Do not edit tracked project files during the research phase unless the task is explicitly an investigation or reproduction task.
+2. Prove the problem. Reproduce the bug or demonstrate the missing behavior on the current implementation. Do not implement a fix for a bug that only exists in the prompt or in an unverified assumption.
+3. Compare solutions. Consider the smallest focused fix and a reasonable alternative when the change affects architecture, public APIs, compatibility, security, or release behavior. Record why the selected approach fits the repository.
+4. Implement narrowly. Avoid unrelated refactors, opportunistic formatting, new abstractions, defensive checks, comments, or validation that are not required by the demonstrated problem.
+5. Verify independently. Run the focused regression test or reproducer, relevant existing tests, static analysis, lint, and build checks that apply to the change. Do not treat an agent-generated report as proof.
+6. Review for deletion. Inspect every new helper, wrapper, interface, guard, comment, test, and documentation block. If removing it preserves the verified behavior and project contract, remove it.
+7. Report proportionally. Keep ordinary implementation and review summaries short. Include detailed evidence for audits, security work, release work, compatibility changes, and incidents.
+
 ## Non-negotiable discovery rules
 
 1. Inspect the target repository before coding. At minimum, look for `composer.json`, `composer.lock`, `plugin.yml`, `virion.yml`, `devtools.yml`, `.poggit.yml`, `README*`, `.github/workflows`, `src/`, `resources/`, and tests.
