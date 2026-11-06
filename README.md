@@ -24,6 +24,10 @@ It keeps the repository's own conventions as the primary source of truth, then a
 
 ```text
 axolotl-pm-skill/
+├── .github/
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── validate.yml
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -62,7 +66,7 @@ Run the repository validator after editing the skill:
 python scripts/validate_skill.py
 ```
 
-The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, and scaffold placeholders without requiring third-party packages.
+The official Codex `skill-creator` validator should also be run before publishing a new revision. The local validator checks the frontmatter, skill name, required UI metadata, linked references, scaffold placeholders, workflow action pins, and GitHub Actions Dependabot configuration without requiring third-party packages.
 
 When changing a reference, update the routing link in `SKILL.md` if its activation condition changes. Keep detailed, mode-specific instructions in references rather than expanding the entrypoint with duplicated material.
 

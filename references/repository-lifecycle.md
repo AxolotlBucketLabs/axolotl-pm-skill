@@ -104,6 +104,15 @@ Keep verification proportional. A short statement that names the relevant checks
 
 Build and verify the candidate from the exact commit intended for release. Create or move the tag only after the artifact, manifest, resources, dependencies, and runtime entry point have been checked. Do not rebuild different bytes after verification and call them the same release.
 
+Before creating a release, perform a version consistency check:
+
+1. Identify the authoritative version field for the artifact.
+2. Read the plugin or virion manifest from the source tree and confirm its version format.
+3. Resolve the intended Git tag to the exact source commit.
+4. Inspect the built PHAR or package metadata and confirm its plugin name, virion name, version, resources, and artifact filename.
+5. Compare the manifest, tag, changelog heading, GitHub Release title, README compatibility text, and generated artifact.
+6. Stop the release when any value disagrees. Do not repair a mismatch by editing only the release title or badge.
+
 ## README scope and length
 
 There is no universal README word count. Choose the smallest README that lets a new user identify, install, use, troubleshoot, and verify the artifact.

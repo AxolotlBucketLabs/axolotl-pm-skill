@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the structure and routing links of this Codex skill."""
+"""Validate the structure, routing links, and CI policy of this Codex skill."""
 
 from __future__ import annotations
 
@@ -11,10 +11,54 @@ from pathlib import Path
 EXPECTED_NAME = "axolotl-pm-skill"
 PLACEHOLDER_RE = re.compile(r"\b(?:TODO|FIXME|REPLACE_ME|YOUR_[A-Z_]+)\b")
 REFERENCE_RE = re.compile(r"\]\((references/[^)]+)\)")
+ACTION_USE_RE = re.compile(
+    r"^\s*uses:\s*([^\s]+)@([^\s#]+)(?:\s+#\s*(.*?))?\s*$"
+)
+FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+VERSION_COMMENT_RE = re.compile(r"^v[0-9]+(?:\.[0-9]+){0,2}(?:[-+][0-9A-Za-z.-]+)?$")
+MUTABLE_ACTION_REFS = {"HEAD", "develop", "dev", "latest", "main", "master"}
 
 
 def fail(message: str) -> None:
     raise SystemExit(f"error: {message}")
+
+
+def validate_workflows(skill_dir: Path) -> None:
+    workflow_dir = skill_dir / ".github" / "workflows"
+    if not workflow_dir.is_dir():
+        fail(".github/workflows is missing")
+
+    workflows = sorted((*workflow_dir.glob("*.yml"), *workflow_dir.glob("*.yaml")))
+    if not workflows:
+        fail(".github/workflows has no workflow files")
+
+    for workflow in workflows:
+        for line_number, line in enumerate(workflow.read_text(encoding="utf-8").splitlines(), 1):
+            match = ACTION_USE_RE.match(line)
+            if match is None:
+                continue
+
+            action, reference, version_comment = match.groups()
+            if action.startswith("./"):
+                continue
+            if reference in MUTABLE_ACTION_REFS:
+                fail(f"{workflow.name}:{line_number} uses mutable action ref {reference}")
+            if FULL_SHA_RE.fullmatch(reference) is None:
+                fail(f"{workflow.name}:{line_number} must pin {action} to a full commit SHA")
+            if version_comment is None or VERSION_COMMENT_RE.fullmatch(version_comment.strip()) is None:
+                fail(f"{workflow.name}:{line_number} needs a version comment beside {action}")
+
+
+def validate_dependabot(skill_dir: Path) -> None:
+    dependabot_file = skill_dir / ".github" / "dependabot.yml"
+    if not dependabot_file.is_file():
+        fail(".github/dependabot.yml is missing")
+
+    dependabot_text = dependabot_file.read_text(encoding="utf-8")
+    if re.search(r"^\s*-\s*package-ecosystem:\s*github-actions\s*$", dependabot_text, re.MULTILINE) is None:
+        fail(".github/dependabot.yml must update GitHub Actions")
+    if re.search(r"^\s*directory:\s*/\s*$", dependabot_text, re.MULTILINE) is None:
+        fail(".github/dependabot.yml must monitor the repository root")
 
 
 def main() -> int:
@@ -54,6 +98,9 @@ def main() -> int:
     for reference in REFERENCE_RE.findall(skill_text):
         if not (skill_dir / reference).is_file():
             fail(f"referenced file does not exist: {reference}")
+
+    validate_workflows(skill_dir)
+    validate_dependabot(skill_dir)
 
     print(f"Skill is valid: {EXPECTED_NAME}")
     return 0
