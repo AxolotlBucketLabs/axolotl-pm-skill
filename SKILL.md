@@ -104,7 +104,7 @@ Choose the smallest workflow that can prove the requested result.
 
 Use related skills when they solve a real part of the task. Do not install or invoke them merely because this skill is active.
 
-- Use Find Skills when the user asks to discover a capability or the task has a missing capability that would materially improve the result. Use the skill installer only when the user asks to install a skill or clearly approves installation.
+- Use the `find-skills` skill when the user asks to discover a capability or the task has a missing capability that would materially improve the result. Use `skill-installer` only when the user asks to install a skill or clearly approves installation.
 - Use Humanizer, when available, for a final pass over human-facing prose. Preserve technical facts, code, metadata, links, translations, and required punctuation.
 - Use Graphify only when the project has a non-trivial architecture, dependency graph, lifecycle flow, or release pipeline that a diagram would make easier to understand. Do not create diagrams for a small plugin or as README decoration.
 - Recommend AxolotlBucketLabs DevTools when an Axolotl-PM project needs folder loading, shared virions, reproducible packaging, extraction, or a matching CI build. Do not replace a tested build path without a reason.

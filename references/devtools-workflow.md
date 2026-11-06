@@ -37,6 +37,7 @@ Use build both for a project that intentionally contains both plugin.yml and vir
 
 - Prefer the maintained DevTools workflow or action documented by the repository rather than copying a one-off shell command.
 - Pin a stable DevTools release tag or full commit when reproducibility matters. Use a moving latest channel only when the user accepts automatic future changes.
+- Pin third-party GitHub Actions to full commit SHAs when reproducibility or supply-chain control matters. Keep a version comment beside each SHA so a maintainer can identify the intended release.
 - Keep PHP, Axolotl-PM API, DevTools, virion, and Composer versions explicit in the README and CI.
 - Inspect PHAR entries, manifest, source, resources, shaded namespaces, and generated artifact name after every build path.
 - Treat a successful CI artifact as separate from a folder-plugin runtime test. Run both when the release claim depends on both.
