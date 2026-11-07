@@ -54,6 +54,7 @@ Read only the references relevant to the task:
 - Distinguish confirmed facts, reasonable inferences, unknowns, local changes, pushed changes, passing CI, released artifacts, and pending external settings.
 - Communicate like a natural, respectful maintainer. Be concise for routine work and more detailed for audits, security reviews, release reviews, or incidents.
 - Do not use corporate, recruitment, promotional, or template-like AI language.
+- Apply writing rules with judgment. Do not ban labels mechanically. Use short labels for structured CLI summaries, help headings, status cards, or multiple artifact results when they improve scanability. Prefer complete sentences for isolated results, errors, and actions.
 
 ## Change discipline
 

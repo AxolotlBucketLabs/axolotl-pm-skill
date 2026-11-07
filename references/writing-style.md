@@ -22,9 +22,17 @@ These rules target overuse. They do not claim that a Unicode dash or semicolon i
 
 Treat text sent to players, command senders, server consoles, loggers, exceptions, CLI output, and diagnostics as human-facing prose, even when the text is written inside PHP code.
 
-Apply the same writing rules to runtime message text. Do not use semicolons, em dashes, en dashes, or unnecessary label-shaped colons in authored messages. Split independent thoughts into separate sentences.
+Apply the same writing rules to runtime message text. Do not use semicolons or Unicode dashes in authored messages. Avoid label-shaped colons when they replace a sentence, but do not treat labels as an absolute ban.
 
 Prefer one clear problem and one actionable next step. Explain the cause only when it helps the user decide what to do.
+
+Choose between a sentence and a label from the output's purpose.
+
+- Prefer a complete sentence for one result, one error, one cause, or one suggested action. Write `The PHAR was written to build/Plugin.phar.` instead of creating an isolated `Output:` label.
+- Use short labels when the output is a compact status card, a help block, a table-like summary, or a result with multiple independent fields that users need to scan. Conventional headings such as `Usage` and `Options` are valid in CLI help.
+- Use labels to distinguish multiple artifacts when the distinction matters, such as `Plugin output` and `Virion output`. Keep the labels short and consistent within that block.
+- Use a `Next` heading only when there is a real group of follow-up actions. For one action, write the action as a direct sentence.
+- Do not add labels only to make a short message look structured. Do not remove a label only because it contains a colon. Review whether it improves scanability, clarity, or machine interaction first.
 
 Keep technical paths, versions, package names, class names, URLs, identifiers, and logger-provided metadata unchanged when they are required for diagnosis.
 
@@ -145,4 +153,4 @@ Before finalizing human-facing prose, search only the prose files and review eve
 rg -n '[\x{2013}\x{2014};]' README.md CHANGELOG.md docs .github
 ```
 
-Also review for label-shaped sentences such as `Status: explanation`, unnecessary colons, curly quotation marks, and unsupported completion claims. Do not run a blind replacement across the entire repository. A match in code, a URL, a license, a translation, or a machine-readable file may be correct.
+Also review for unnecessary label-shaped sentences such as `Status: explanation`, while allowing labels that improve a structured CLI summary or help block. Review curly quotation marks and unsupported completion claims. Do not run a blind replacement across the entire repository. A match in code, a URL, a license, a translation, or a machine-readable file may be correct.
