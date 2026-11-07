@@ -27,11 +27,22 @@ Use GitHub Flavored Markdown as a semantic format. Choose the structure that hel
 - Keep the opening and closing fence paired. Use the same fence character for both sides and do not close a block before its content ends.
 - Do not place code directly in prose when the reader needs to copy it or distinguish it from the surrounding sentence.
 - Use headings for document structure. Do not use bold text as a substitute for a heading.
-- Use a table for repeated fields such as commands, permissions, configuration keys, API entries, or compatibility versions when a table is easier to scan than a list.
+- Use a table for small, human-facing groups of repeated fields such as commands, permissions, configuration keys, API entries, or compatibility versions when a table is easier to scan than a list.
 - Use a list for independent points. Do not turn a short list into a table without a readability benefit.
 - Use descriptive links and repository-relative links when they are stable. Prefer GitHub issue, pull request, commit, and file references when they give the reader useful context.
 - Use `<details>` with a useful `<summary>` for long logs, optional troubleshooting, and technical detail that most readers do not need immediately.
 - Use GitHub alerts only for information that affects installation, compatibility, security, migration, or another important user decision. Do not use alerts as decoration.
+
+### Human-facing Markdown and structured data
+
+- Use Markdown for project context, explanations, procedures, examples, caveats, and compact human-facing summaries.
+- Use a Markdown table for a small and stable comparison that a human reader needs to scan.
+- Do not use a Markdown table or a long bullet list as the only source for repeated records, inventories, registries, configuration contracts, API responses, compatibility data, or other structured information.
+- Use JSON or YAML when repeated data is consumed by scripts, validated, generated, audited, or likely to drift as the project grows.
+- Add a JSON Schema or a focused validator when the structured file is a contract that other tools or contributors must follow.
+- Keep one canonical source for structured facts. Link to it from Markdown or generate the human-facing Markdown from it instead of maintaining two independent copies.
+- Do not create JSON merely to replace a tiny static table that has no consumer, validation need, or likely maintenance problem.
+- Do not convert every Markdown table into JSON. Choose the format from the reader, data size, update frequency, validation need, and consuming tools.
 
 When Markdown contains another Markdown document or a nested code block, use a longer outer fence or a tilde fence. Do not wrap both levels with the same triple backtick fence. Do not extract LLM output by splitting on the literal triple-backtick delimiter because a nested fence or a backtick inside a string can truncate valid content.
 

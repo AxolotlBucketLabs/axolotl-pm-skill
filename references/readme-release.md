@@ -34,7 +34,8 @@ Use code examples that match the current method signatures. A short README is ac
 Keep the README easy to scan on GitHub. Apply the detailed prose and Markdown rules in [writing-style.md](writing-style.md), then use the following artifact-specific choices:
 
 - Put badges near the project identity. Keep them on one or two compact lines and link each badge to a real destination.
-- Put commands, permissions, configuration keys, compatibility versions, and artifact details in a table when there are several repeated entries.
+- Put small, human-facing groups of commands, permissions, configuration keys, compatibility versions, and artifact details in a table when that makes them easier to scan. Follow the [structured data guidance](writing-style.md) for exhaustive inventories, registries, schemas, and generated data.
+- Do not make the README the only source for a large or reusable dataset. Keep the canonical JSON or YAML separate and link to it or render a compact view from it.
 - Put installation commands in a fenced `sh` block and code examples in a fenced block with the correct language tag.
 - Use `<details>` for long troubleshooting sections, build logs, or optional implementation detail. Keep the summary useful without requiring the reader to expand it.
 - Use a GitHub alert only for a compatibility limit, migration step, security warning, or other information that can block a successful installation or upgrade.

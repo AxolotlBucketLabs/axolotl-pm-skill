@@ -131,6 +131,8 @@ Keep each section proportional. The description usually needs one or two short p
 
 Move long API references, architecture explanations, migration guides, and troubleshooting trees out of the README when they stop helping a first-time user complete the common task.
 
+When a README or documentation page includes repeated records, an inventory, a registry, a compatibility dataset, or generated audit data, apply the [human-facing Markdown and structured data guidance](writing-style.md). Keep the structured source separate when another tool, workflow, or future audit needs to consume it.
+
 ## Date hygiene
 
 Do not add dates to README files, source comments, headings, or ordinary documentation merely to record when an agent edited them. Git, GitHub commits, pull requests, and releases already provide that history.

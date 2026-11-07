@@ -36,6 +36,7 @@ Read only the references relevant to the task:
 - Prefer the smallest maintainable solution that fits the existing project.
 - Do not add files, abstractions, frameworks, dependencies, configuration, documentation, or comments without a current use case.
 - Before adding a file, identify which workflow or consumer will use it. Avoid duplicate documentation and keep one canonical source for each fact.
+- Choose the file format from its consumer. Read the [human-facing Markdown and structured data guidance](references/writing-style.md) before creating a README table, inventory, registry, or schema.
 - Keep README files, changelogs, comments, and release notes proportional to the project and the task.
 - Write comments for intent, invariants, compatibility constraints, security decisions, or non-obvious failure behavior. Do not comment code that is already clear.
 - Treat repository-local instructions, architecture, naming, workflows, and project identity as constraints. Do not replace them with a preferred template without a reason.
