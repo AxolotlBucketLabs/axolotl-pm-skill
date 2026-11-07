@@ -24,7 +24,7 @@ Read only the references relevant to the task:
 - [virion-workflow.md](references/virion-workflow.md) for library API, `virion.yml`, shading, dependencies, and consumer integration.
 - [quality-and-security-rules.md](references/quality-and-security-rules.md) when implementing or reviewing runtime, namespace, dependency, command, data, SQL, protocol, security, or performance behavior.
 - [devtools-workflow.md](references/devtools-workflow.md) when a project needs Axolotl-PM folder loading, virion sharing, PHAR packaging, extraction, or DevTools-backed CI.
-- [writing-style.md](references/writing-style.md) when writing README files, changelogs, release notes, comments, issues, or other prose for humans.
+- [writing-style.md](references/writing-style.md) when writing README files, changelogs, release notes, comments, issues, runtime messages, diagnostics, or other prose for humans.
 - [readme-release.md](references/readme-release.md) when writing documentation, CI, packaging, compatibility claims, or release artifacts.
 - [repository-lifecycle.md](references/repository-lifecycle.md) when creating or auditing repository identity, commit messages, versioning, changelogs, releases, README scope, dates, or CI freshness.
 - [repository-publishing.md](references/repository-publishing.md) when creating, publishing, or auditing a GitHub repository's metadata, topics, homepage, or home-page features.
@@ -134,7 +134,7 @@ Use related skills when they solve a real part of the task. Do not install or in
 - Document public APIs, lifecycle requirements, non-obvious invariants, compatibility limitations, and packaging requirements. Do not add comments that merely restate obvious code.
 - Do not make `final`, Composer, PHPUnit, a particular brace style, or a particular factory/singleton pattern universal rules. Adopt them when the target repository or API design supports them.
 - Apply the security and performance gates in [quality-and-security-rules.md](references/quality-and-security-rules.md) to new runtime code and reviews. Do not substitute a marketplace policy for repository-specific requirements.
-- Apply the human-facing prose rules in [writing-style.md](references/writing-style.md) to README files, changelogs, release notes, comments, issues, and explanations. Do not apply those prose rules to code or machine-readable data.
+- Apply the human-facing prose rules in [writing-style.md](references/writing-style.md) to README files, changelogs, release notes, comments, issues, runtime messages, diagnostics, and explanations. Do not apply prose punctuation rules to programming syntax or machine-readable data. Apply them to human-facing text embedded in code, such as player messages, console messages, logs, exceptions, CLI output, and diagnostics.
 - When writing a README or release workflow, apply the badge and license rules in [readme-release.md](references/readme-release.md).
 
 ## Verification before completion

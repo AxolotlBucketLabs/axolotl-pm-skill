@@ -18,6 +18,20 @@ For normal English or Vietnamese project prose:
 
 These rules target overuse. They do not claim that a Unicode dash or semicolon is invalid in every human publication. The project style should avoid them by default because they often make generated text sound formal, compressed, or artificial.
 
+## Runtime messages and diagnostics
+
+Treat text sent to players, command senders, server consoles, loggers, exceptions, CLI output, and diagnostics as human-facing prose, even when the text is written inside PHP code.
+
+Apply the same writing rules to runtime message text. Do not use semicolons, em dashes, en dashes, or unnecessary label-shaped colons in authored messages. Split independent thoughts into separate sentences.
+
+Prefer one clear problem and one actionable next step. Explain the cause only when it helps the user decide what to do.
+
+Keep technical paths, versions, package names, class names, URLs, identifiers, and logger-provided metadata unchanged when they are required for diagnosis.
+
+Do not reject PHP syntax semicolons. This rule applies to semicolons inside human-facing string content, not to PHP statements, regular expressions, generated source, or literal configuration syntax.
+
+Review new and changed runtime messages separately from source formatting. A PHP syntax check, static analysis pass, or passing test does not prove that a message reads naturally.
+
 ## GitHub Markdown structure
 
 Use GitHub Flavored Markdown as a semantic format. Choose the structure that helps the reader understand or act on the information. Do not add Markdown features only to make a document look richer.

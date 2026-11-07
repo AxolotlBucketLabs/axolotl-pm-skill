@@ -14,7 +14,7 @@ It keeps the repository's own conventions as the primary source of truth, then a
 - AxolotlBucketLabs DevTools workflows for folder loading, shared virions, PHAR packaging, extraction, and CI.
 - README, badge, license, compatibility, changelog, and release guidance.
 - Repository identity, commit messages, version mapping, release notes, README scope, date hygiene, and CI freshness.
-- Human-facing writing rules for natural README, changelog, release note, comment, and issue prose.
+- Human-facing writing rules for natural README, changelog, release note, comment, issue, runtime message, and diagnostic prose.
 - GitHub Flavored Markdown structure for inline code, fenced code, tables, alerts, links, and collapsed details.
 - Maintainer posture that keeps changes focused, evidence-based, proportional, and aligned with the project's direction.
 - GitHub repository metadata, homepage and topic setup, discoverability checks, and UI-only feature settings.
