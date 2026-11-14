@@ -86,49 +86,13 @@ Before finishing a Markdown change, inspect the raw source and the rendered resu
 
 ## Pull request writing
 
-Keep routine pull request titles short and specific.
+Read the target repository's pull request template and `CONTRIBUTING` guidance before drafting. Follow their required fields, testing instructions, and AI-use rules. Use repository changes and check results to fill in facts. Ask the user for any required information that cannot be verified.
 
-The description should usually explain the following:
+If the repository has no pull request template, follow `CONTRIBUTING` and keep the title and description as short as possible, usually a specific title and one or two sentences about the change and its purpose. Do not add headings, checklists, or a `Verification` section by habit. If `CONTRIBUTING` asks for test details, include one brief, relevant sentence. Omit routine details such as commit signing and generic diff checks.
 
-- Explain what problem was observed.
-- Explain what changed.
-- Mention the checks that help the reviewer evaluate this change.
-- Explain any compatibility or release risk that matters.
+If repository guidance prohibits AI-written pull requests, do not create one with agent-written text. Tell the user which rule applies and ask them to review and edit any existing draft or write the required text themselves. Wait for their explicit approval before creating the pull request. If the guidance prohibits AI assistance more broadly, do not prepare or submit the contribution until the user chooses a compliant path.
 
-Do not paste a complete command log, every test count, every internal reasoning step, or unrelated repository details into an ordinary pull request.
-
-Do not add a `Verification` heading to every pull request. GitHub does not require that heading, and a pull request body is not a CI transcript.
-
-Read the repository's pull request template before writing the description. Follow a project-specific `Testing`, `Verification`, or equivalent section when the template requires it. Do not create a new section only because another pull request used one.
-
-For an ordinary pull request, a short sentence or compact list of relevant checks is enough. Use a dedicated evidence section only when the change has a meaningful review boundary that the diff or GitHub Checks cannot show, such as runtime behavior, PHAR contents, release provenance, migrations, security reproductions, or compatibility matrices.
-
-For documentation, badge, metadata, formatting, translation, or reference-only changes, use focused checks and usually omit a verification section. Mention a limitation when a required check could not run, but do not list every unavailable or unrelated tool.
-
-Use more detailed verification when the project requires it for a security review, release review, incident, or compatibility change. Keep that detail proportional to the reviewer's actual need.
-
-Avoid vague descriptions such as:
-
-- Improve robustness and handle edge cases.
-- Fix several issues.
-- Update implementation.
-- Make the code better.
-
-Prefer a concrete description such as:
-
-```text
-Fix typed catch handling in the shaded PHAR
-
-The shaded catch path was not matched at runtime because the generated namespace was not included in the handler. The change updates the narrow handler and verifies the packaged PHAR with the focused runtime test and PHPStan.
-```
-
-A CI summary such as `105 tests and 504 assertions` is useful when the number is relevant to the review. It should not be included only to make the pull request appear more complete.
-
-If the repository has a pull request template, follow it. This rule prevents an agent from writing more detail than the project requires.
-
-When creating a pull request with GitHub CLI, do not use generated title and body text without reviewing it. In particular, treat `gh pr create --fill` as unsafe for final prose because commit messages can contain private task context or details that do not belong in the public pull request.
-
-Do not paste a full verification transcript into a routine pull request. Include the checks that matter to the change and mention a limitation when a required check could not run.
+Do not use generated title or body text as final copy without reviewing it. In particular, review `gh pr create --fill` because commit messages may contain private task context or irrelevant details.
 
 ## Review and handoff discipline
 

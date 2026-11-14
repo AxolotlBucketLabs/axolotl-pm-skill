@@ -80,7 +80,7 @@ These gates apply before an agent presents a non-trivial change as complete.
 - Verify the change independently with the strongest checks that apply. Report only the evidence relevant to the change and its failure boundary. Keep routine pull request evidence concise, and never turn an unexecuted check into a passing claim.
 - Inspect the final diff for unrelated formatting, refactors, generated files, prompt context, private links, or copied wording. Remove anything that does not belong to the deliverable.
 - Before completing a human-facing Markdown change, inspect both the raw source and its rendered structure. Check inline code, fenced code, language tags, links, tables, alerts, and collapsed sections when they are used.
-- Read the repository's pull request template before writing a pull request. Keep the title and description focused on the observed problem, the narrow change, relevant evidence, and any real compatibility risk. Do not add a `Verification` heading by default. Follow a project-specific evidence section only when the template or change risk requires it.
+- Before creating a pull request, read the target repository's pull request template and `CONTRIBUTING` guidance. Follow their required fields and AI-use rules. Apply the [pull request writing guidance](references/writing-style.md), and ask the user when required information cannot be verified.
 
 ## Maintaining this skill
 
